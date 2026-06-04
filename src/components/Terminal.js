@@ -18,18 +18,7 @@ const Profile = {
     "Full-Stack Developer",
     "Cybersecurity Learner"
   ],
-  radarMetrics: {
-    frontend: "90%",
-    backend: "75%",
-    aiml: "60%",
-    cybersecurity: "45%"
-  },
-  bio: "I build intelligent, scalable and secure solutions that solve real-world problems using modern technologies.",
-  socials: {
-    github: "github.com/fardinhossain",
-    linkedin: "linkedin.com/in/fardinhosn",
-    email: "fardin.hosn@gmail.com"
-  }
+  bio: "I build intelligent, scalable and secure solutions that solve real-world problems using modern technologies."
 };`;
 
 export function renderTerminal() {
@@ -79,8 +68,14 @@ export function initTerminal() {
   let typingComplete = false;
   let typingInterval = null;
   let currentIndex = 0;
+  let hasTypedOnce = false;
 
   function startTyping() {
+    if (hasTypedOnce) {
+      skipToEnd();
+      return;
+    }
+
     // Reset state
     typedText = '';
     typingComplete = false;
@@ -106,6 +101,7 @@ export function initTerminal() {
         clearInterval(typingInterval);
         typingInterval = null;
         typingComplete = true;
+        hasTypedOnce = true;
         skipBtn.style.display = 'none';
         codeEl.textContent = typedText;
         if (typeof Prism !== 'undefined') {
@@ -129,6 +125,7 @@ export function initTerminal() {
     stopTyping();
     typedText = CODE_STRING;
     typingComplete = true;
+    hasTypedOnce = true;
     skipBtn.style.display = 'none';
     codeEl.textContent = typedText;
     if (typeof Prism !== 'undefined') {
@@ -151,15 +148,17 @@ export function initTerminal() {
           stopTyping();
           startTyping();
         } else {
-          // Scrolled out of view — reset
+          // Scrolled out of view — reset only if not typed yet
           stopTyping();
-          typedText = '';
-          typingComplete = false;
-          currentIndex = 0;
-          codeEl.textContent = '';
-          skipBtn.style.display = 'none';
-          if (typeof window.syncHeroCardReveal === 'function') {
-            window.syncHeroCardReveal('', false);
+          if (!hasTypedOnce) {
+            typedText = '';
+            typingComplete = false;
+            currentIndex = 0;
+            codeEl.textContent = '';
+            skipBtn.style.display = 'none';
+            if (typeof window.syncHeroCardReveal === 'function') {
+              window.syncHeroCardReveal('', false);
+            }
           }
         }
       });
