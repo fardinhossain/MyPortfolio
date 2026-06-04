@@ -6,8 +6,7 @@ const Profile = {
   greeting: "Hello, I'm",
   name: "MD. FARDIN HOSSAIN",
   avatar: {
-    profile: "/fardin.png"
-  },
+    profile: "/fardin.png"  },
   status: "Available for Opportunities",
   roles: [
     "Computer Science Student",
