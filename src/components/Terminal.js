@@ -41,10 +41,10 @@ export function renderTerminal() {
 
     <!-- Bottom Actions -->
     <div class="terminal__actions">
-      <a href="#experience" class="terminal__action-btn terminal__action-btn--run">
+      <a href="#experience" class="terminal__action-btn terminal__action-btn--run" id="terminal-run-btn">
         ${iconPlay(14, 'terminal-icon-play')} Run Profile
       </a>
-      <a href="#projects" class="terminal__action-btn terminal__action-btn--projects">
+      <a href="#projects" class="terminal__action-btn terminal__action-btn--projects" id="terminal-projects-btn">
         ${iconFolderGit2(14, 'terminal-icon-folder')} View Projects
       </a>
       <button class="terminal__action-btn terminal__action-btn--skip" id="terminal-skip-btn" style="display:none;">
@@ -58,6 +58,8 @@ export function initTerminal() {
   const container = document.getElementById('terminal-root');
   const codeEl = document.getElementById('terminal-code');
   const skipBtn = document.getElementById('terminal-skip-btn');
+  const runBtn = document.getElementById('terminal-run-btn');
+  const projectsBtn = document.getElementById('terminal-projects-btn');
 
   if (!container || !codeEl || !skipBtn) return;
 
@@ -66,6 +68,35 @@ export function initTerminal() {
   let typingInterval = null;
   let currentIndex = 0;
   let hasTypedOnce = false;
+
+  const isMobile = window.innerWidth < 1024;
+  let backdropEl = null;
+
+  function dismissPopup() {
+    if (!isMobile || !container.classList.contains('terminal--mobile-popup')) return;
+    
+    container.classList.add('terminal--fade-out');
+    if (backdropEl) {
+      backdropEl.classList.add('terminal-backdrop--fade-out');
+    }
+
+    setTimeout(() => {
+      container.classList.remove('terminal--mobile-popup');
+      container.classList.remove('terminal--fade-out');
+      if (backdropEl && backdropEl.parentNode) {
+        backdropEl.parentNode.removeChild(backdropEl);
+      }
+      backdropEl = null;
+    }, 400);
+  }
+
+  // Setup mobile popup overlay on initial load
+  if (isMobile) {
+    backdropEl = document.createElement('div');
+    backdropEl.className = 'terminal-backdrop';
+    document.body.appendChild(backdropEl);
+    container.classList.add('terminal--mobile-popup');
+  }
 
   function startTyping() {
     if (hasTypedOnce) {
@@ -107,6 +138,7 @@ export function initTerminal() {
         if (typeof window.syncHeroCardReveal === 'function') {
           window.syncHeroCardReveal(CODE_STRING, true);
         }
+        dismissPopup();
       }
     }, 18);
   }
@@ -131,16 +163,23 @@ export function initTerminal() {
     if (typeof window.syncHeroCardReveal === 'function') {
       window.syncHeroCardReveal(CODE_STRING, true);
     }
+    dismissPopup();
   }
 
-  // Skip button handler
+  // Action event handlers
   skipBtn.addEventListener('click', skipToEnd);
+  if (runBtn) {
+    runBtn.addEventListener('click', skipToEnd);
+  }
+  if (projectsBtn) {
+    projectsBtn.addEventListener('click', skipToEnd);
+  }
 
   // IntersectionObserver to replace useInView
   const observer = new IntersectionObserver(
     (entries) => {
-      const isMobile = window.innerWidth < 1024;
-      if (isMobile) return; // Ignore observer on mobile to let it auto-run to completion
+      const isMobileViewport = window.innerWidth < 1024;
+      if (isMobileViewport) return; // Ignore observer on mobile to let it auto-run to completion
 
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
