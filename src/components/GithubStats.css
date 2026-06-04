@@ -98,35 +98,36 @@
   text-decoration: underline;
 }
 
-/* Stats Grid */
+/* Stats Grid — 2×2 on all screen sizes */
 .github-stats__grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 1fr 1fr;
   gap: 0.75rem;
   margin-bottom: 2rem;
-  text-align: center;
   font-size: 0.75rem;
   line-height: 1rem;
   font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
-  padding: 0.25rem;
 }
 @media (min-width: 768px) {
   .github-stats__grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 1rem;
     font-size: 0.875rem;
     line-height: 1.25rem;
   }
 }
 .github-stats__stat-card {
-  padding: 0.75rem;
+  padding: 0.875rem 1rem;
   background-color: #1a0f0f;
   border: 1px solid rgba(136, 19, 55, 0.2);
   border-radius: 0.75rem;
+  transition: border-color 0.15s ease;
+}
+.github-stats__stat-card:hover {
+  border-color: rgba(244, 63, 94, 0.3);
 }
 .github-stats__stat-label {
   color: #64748b;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.5rem;
   text-align: left;
   display: flex;
   align-items: center;
@@ -135,7 +136,7 @@
 .github-stats__stat-dot {
   width: 0.5rem;
   height: 0.5rem;
-  border-radius: 0.125rem;
+  border-radius: 9999px;
   display: inline-block;
   flex-shrink: 0;
 }
@@ -152,28 +153,26 @@
   background-color: #f43f5e;
 }
 .github-stats__stat-value {
-  font-size: 1.5rem;
-  line-height: 2rem;
+  font-size: 1.875rem;
+  line-height: 2.25rem;
   font-weight: 700;
   color: #ffffff;
   text-align: left;
-  padding-left: 0.75rem;
 }
 
 /* Contribution Graph */
 .github-stats__contrib-graph {
-  display: none;
+  display: flex;
   flex-direction: column;
   gap: 0.25rem;
   margin-bottom: 2rem;
   opacity: 0.6;
   mix-blend-mode: screen;
-  overflow: hidden;
+  overflow-x: auto;
+  scrollbar-width: none;
 }
-@media (min-width: 640px) {
-  .github-stats__contrib-graph {
-    display: flex;
-  }
+.github-stats__contrib-graph::-webkit-scrollbar {
+  display: none;
 }
 .github-stats__contrib-row {
   display: flex;
@@ -192,17 +191,11 @@
   border-top: 1px solid rgba(136, 19, 55, 0.3);
   padding-top: 1.5rem;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 1.5rem;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   margin-top: auto;
-}
-@media (min-width: 640px) {
-  .github-stats__lang-section {
-    flex-direction: row;
-    justify-content: flex-start;
-  }
 }
 
 /* Donut Chart */

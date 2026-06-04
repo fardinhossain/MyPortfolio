@@ -68,6 +68,8 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 body {
@@ -80,6 +82,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.5;
   overflow-x: hidden;
+  width: 100%;
 }
 
 a {
@@ -161,20 +164,26 @@ ul, ol {
   color: var(--text-slate-300);
   font-family: var(--font-sans);
   overflow-x: hidden;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .app-main {
+  width: 100%;
   max-width: 1400px;
   margin: 0 auto;
-  padding: 1.5rem 1rem;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem;
+  min-width: 0;
 }
 
 @media (min-width: 768px) {
   .app-main {
-    padding: 1.5rem 2rem;
+    padding: 2rem;
+    gap: 2rem;
   }
 }
 
@@ -182,39 +191,45 @@ ul, ol {
 .grid-top-row {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1.5rem;
+  gap: 1rem;
   scroll-margin-top: 6rem;
+  min-width: 0;
 }
 
 @media (min-width: 1024px) {
   .grid-top-row {
     grid-template-columns: 1fr 1.1fr;
+    gap: 2rem;
   }
 }
 
 .grid-skills-row {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1.5rem;
+  gap: 1rem;
   scroll-margin-top: 6rem;
+  min-width: 0;
 }
 
 @media (min-width: 1024px) {
   .grid-skills-row {
     grid-template-columns: 3fr 1fr;
+    gap: 2rem;
   }
 }
 
 .grid-experience-row {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1.5rem;
+  gap: 1rem;
   scroll-margin-top: 6rem;
+  min-width: 0;
 }
 
 @media (min-width: 1024px) {
   .grid-experience-row {
     grid-template-columns: 1fr 1.1fr;
+    gap: 2rem;
   }
 }
 

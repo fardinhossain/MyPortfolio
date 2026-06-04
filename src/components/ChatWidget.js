@@ -1,5 +1,6 @@
 import './ChatWidget.css';
 import { iconBot, iconX, iconSend, iconLoader2 } from '../icons.js';
+import DOMPurify from 'dompurify';
 
 export function renderChatWidget() {
   return `<div class="chat-widget-wrapper" id="chat-widget-root">
@@ -82,9 +83,7 @@ export function initChatWidget() {
   }
 
   function escapeHTML(str) {
-    const div = document.createElement('div');
-    div.textContent = str;
-    return div.innerHTML;
+    return DOMPurify.sanitize(str);
   }
 
   function updateQuickReplies() {
