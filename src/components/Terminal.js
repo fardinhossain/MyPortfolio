@@ -7,8 +7,7 @@ const Profile = {
   greeting: "Hello, I'm",
   name: "MD. FARDIN HOSSAIN",
   avatar: {
-    anime: "/fardin-anime.png",
-    real: "/fardin-real.png"
+    profile: "/fardin.png"
   },
   status: "Available for Opportunities",
   roles: [
@@ -18,7 +17,7 @@ const Profile = {
     "Full-Stack Developer",
     "Cybersecurity Learner"
   ],
-  bio: "I build intelligent, scalable and secure solutions that solve real-world problems using modern technologies."
+  bio: "I build intelligent, scalable and secure solutions ..."
 };`;
 
 export function renderTerminal() {
