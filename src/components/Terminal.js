@@ -139,6 +139,9 @@ export function initTerminal() {
   // IntersectionObserver to replace useInView
   const observer = new IntersectionObserver(
     (entries) => {
+      const isMobile = window.innerWidth < 1024;
+      if (isMobile) return; // Ignore observer on mobile to let it auto-run to completion
+
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           // Scrolled into view — start typing
