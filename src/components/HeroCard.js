@@ -128,7 +128,6 @@ export function initHeroCard() {
 
   // Define global synchronization function called by the Terminal typer
   window.syncHeroCardReveal = function(currentText, isSkipped) {
-    const isMobile = window.innerWidth < 1024;
     const ids = [
       { id: 'reveal-status', check: 'status:' },
       { id: 'reveal-avatar', check: 'avatar:' },
@@ -148,7 +147,7 @@ export function initHeroCard() {
       const el = document.getElementById(id);
       if (!el) return;
 
-      if (isMobile || isSkipped || currentText.includes(check)) {
+      if (isSkipped || currentText.includes(check)) {
         el.classList.add('hero-card__reveal--visible');
       } else {
         el.classList.remove('hero-card__reveal--visible');
