@@ -1,11 +1,10 @@
-<<<<<<< HEAD
+
 # Md. Fardin Hossain — Software Engineering Portfolio
 
 [![Node.js Version](https://img.shields.io/badge/Node.js-v18+-339933?style=flat-square&logo=node.js&logoColor=white)](https://nodejs.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 [![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite&logoColor=white)](https://vitejs.dev/)
 [![Express.js](https://img.shields.io/badge/Express.js-000000?style=flat-square&logo=express&logoColor=white)](https://expressjs.com/)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/fardinhosn)
 
 **Software Engineer | Full-Stack Developer | AI Integration Specialist**
 
@@ -17,7 +16,7 @@ A high-performance, single-page application built to demonstrate my expertise in
 
 The application is built on a modern JavaScript stack, utilizing component-based UI rendering without the overhead of heavy frontend frameworks.
 =======
->>>>>>> 23903c02845ff00222bfb640517f955504a3e923
+
 
 - **Frontend:** HTML5, CSS3, ES6+ JavaScript Modules
 - **Backend API:** Node.js, Express.js
