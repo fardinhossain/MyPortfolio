@@ -1,0 +1,8 @@
+{
+  "name": "My_Portfoilo",
+  "description": "",
+  "interface": "index.html",
+  "main": "server.js",
+  "defaultRoute": "/",
+  "type": "html"
+}

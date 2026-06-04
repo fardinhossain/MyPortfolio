@@ -1,0 +1,242 @@
+/* ============================================
+   Terminal.css — Converted from Tailwind
+   ============================================ */
+
+/* Root Container */
+.terminal {
+  background-color: #120a0a;
+  border-radius: 1rem;
+  border: 1px solid rgba(136, 19, 55, 0.3);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+  box-shadow: 0 0 50px rgba(225, 29, 72, 0.03);
+  position: relative;
+  min-width: 0;
+}
+
+/* Title Bar */
+.terminal__title-bar {
+  background-color: rgba(26, 15, 15, 0.8);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(136, 19, 55, 0.3);
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.terminal__dots {
+  display: flex;
+  gap: 0.5rem;
+}
+.terminal__dot {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 9999px;
+}
+.terminal__dot--red {
+  background-color: rgba(244, 63, 94, 0.5);
+}
+.terminal__dot--yellow {
+  background-color: rgba(245, 158, 11, 0.5);
+}
+.terminal__dot--green {
+  background-color: rgba(16, 185, 129, 0.5);
+}
+.terminal__title-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.terminal__title-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background-color: #f43f5e;
+}
+.terminal__title-text {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: #ffffff; /* White file name */
+  font-weight: 500;
+  letter-spacing: 0.025em;
+}
+.terminal__title-spacer {
+  width: 4rem;
+}
+
+/* Editor Content */
+.terminal__editor {
+  padding: 1rem;
+  flex: 1 1 0%;
+  color: #abb2bf;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  overflow-x: auto;
+  position: relative;
+}
+@media (min-width: 768px) {
+  .terminal__editor {
+    padding: 1.5rem;
+  }
+}
+.terminal__editor pre {
+  background: transparent !important;
+  margin: 0 !important;
+  font-size: 0.8125rem !important;
+  line-height: 1.6rem !important;
+}
+.terminal__editor pre code {
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace !important;
+  font-size: 0.8125rem !important;
+  line-height: 1.6rem !important;
+  background: transparent !important;
+}
+
+/* Custom VS Code / Prism.js syntax coloring */
+#terminal-code {
+  color: #d4d4d4 !important;
+}
+#terminal-code .token.comment {
+  color: #6A9955 !important; /* Green */
+}
+#terminal-code .token.keyword {
+  color: #569CD6 !important; /* Blue */
+}
+#terminal-code .token.class-name,
+#terminal-code .token.maybe-class-name,
+#terminal-code .token.function {
+  color: #4EC9B0 !important; /* Cyan Developer/Portfolio */
+}
+#terminal-code .token.string {
+  color: #CE9178 !important; /* Orange */
+}
+#terminal-code .token.property,
+#terminal-code .token.literal-property,
+#terminal-code .token.variable,
+#terminal-code .token.parameter {
+  color: #9CDCFE !important; /* Light Blue properties/variables */
+}
+#terminal-code .token.number {
+  color: #B5CEA8 !important; /* Light Green numbers */
+}
+#terminal-code .token.punctuation,
+#terminal-code .token.operator {
+  color: #D4D4D4 !important; /* White punctuation/brackets */
+}
+
+/* Gutter & Code Container Layout (No Horizontal Scroll, Auto Wrap) */
+.terminal__editor pre.line-numbers {
+  position: relative !important;
+  padding-left: 3.5rem !important; /* Dedicated gutter width */
+  overflow-x: hidden !important; /* Prevent horizontal scroll */
+  white-space: pre-wrap !important; /* Enable line wrapping */
+  word-break: break-word !important;
+}
+
+.terminal__editor pre.line-numbers code {
+  white-space: pre-wrap !important;
+  word-break: break-word !important;
+  display: block !important;
+  position: relative !important;
+}
+
+/* Dedicated Gutter Positioning */
+.terminal__editor pre.line-numbers .line-numbers-rows {
+  position: absolute !important;
+  left: -3.5rem !important; /* Shift left into the pre padding area */
+  top: 0 !important;
+  width: 2.5rem !important; /* Dedicated gutter width */
+  height: 100% !important;
+  border-right: 1px solid rgba(244, 63, 94, 0.15) !important; /* Cyberpunk maroon line separator */
+  padding-right: 0.6rem !important;
+  text-align: right !important;
+  user-select: none !important;
+  line-height: inherit !important;
+  font-size: inherit !important;
+}
+
+.terminal__editor pre.line-numbers .line-numbers-rows > span::before {
+  color: #6A9955 !important; /* Green line numbers */
+  opacity: 0.8 !important;
+}
+
+/* Responsive Gutter: Hide line numbers on small mobile screens to prevent cramming */
+@media (max-width: 640px) {
+  .terminal__editor pre.line-numbers {
+    padding-left: 0.5rem !important;
+  }
+  .terminal__editor pre.line-numbers .line-numbers-rows {
+    display: none !important;
+  }
+}
+
+/* Bottom Actions */
+.terminal__actions {
+  padding: 0 1rem 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+}
+@media (min-width: 768px) {
+  .terminal__actions {
+    padding: 0 1.5rem 1.5rem;
+  }
+}
+.terminal__action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+  text-decoration: none;
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+  cursor: pointer;
+}
+.terminal__action-btn svg {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+.terminal__action-btn--run {
+  border: 1px solid rgba(136, 19, 55, 0.5);
+  background-color: rgba(76, 5, 25, 0.2);
+  color: #fb7185;
+}
+.terminal__action-btn--run:hover {
+  background-color: rgba(136, 19, 55, 0.4);
+  color: #fda4af;
+}
+.terminal__action-btn--projects {
+  border: 1px solid rgba(136, 19, 55, 0.3);
+  background-color: #0a0606;
+  color: #cbd5e1;
+}
+.terminal__action-btn--projects:hover {
+  background-color: #1a0f0f;
+  color: #ffffff;
+}
+.terminal__action-btn--projects svg {
+  color: #94a3b8;
+}
+.terminal__action-btn--skip {
+  margin-left: auto;
+  border: 1px solid rgba(136, 19, 55, 0.3);
+  background: transparent;
+  color: #94a3b8;
+}
+.terminal__action-btn--skip:hover {
+  background-color: #1a0f0f;
+  color: #ffffff;
+}

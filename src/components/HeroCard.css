@@ -1,0 +1,445 @@
+/* ============================================
+   HeroCard.css — Converted from Tailwind
+   ============================================ */
+
+/* Keyframes */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* Root Card */
+.hero-card {
+  background-color: #120a0a;
+  border-radius: 1rem;
+  border: 1px solid rgba(136, 19, 55, 0.3);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+}
+@media (min-width: 768px) {
+  .hero-card {
+    padding: 2rem;
+    flex-direction: row;
+    align-items: stretch;
+    gap: 2rem;
+  }
+}
+
+/* Background Glow */
+.hero-card__bg-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  border-radius: 1rem;
+}
+.hero-card__bg-glow-blob {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 400px;
+  height: 400px;
+  background-color: rgba(244, 63, 94, 0.1);
+  filter: blur(100px);
+  transform: translateY(-50%);
+}
+.hero-card__bg-glow-line {
+  position: absolute;
+  bottom: 0;
+  left: 25%;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(244, 63, 94, 0.5), transparent);
+}
+
+/* Image Section */
+.hero-card__image-section {
+  position: relative;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* Available Badge */
+.hero-card__available-badge {
+  position: absolute;
+  top: -0.75rem;
+  left: 0;
+  background-color: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  color: #34d399;
+  font-size: 10px;
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+  padding: 0.125rem 0.5rem;
+  border-radius: 0.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  z-index: 10;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.hero-card__available-dot {
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: 9999px;
+  background-color: #34d399;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Profile Photo Ring */
+.hero-card__photo-ring {
+  width: 10rem;
+  height: 10rem;
+  border-radius: 9999px;
+  position: relative;
+  z-index: 0;
+  padding: 0.25rem;
+  background: linear-gradient(to bottom, rgba(244, 63, 94, 0.5), transparent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+  transition: transform 500ms ease;
+}
+@media (min-width: 768px) {
+  .hero-card__photo-ring {
+    width: 14rem;
+    height: 14rem;
+  }
+}
+.hero-card__image-section:hover .hero-card__photo-ring {
+  transform: scale(1.05);
+}
+
+/* Spinning Borders */
+.hero-card__spin-border {
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  border-radius: 9999px;
+  border: 1px solid rgba(244, 63, 94, 0.3);
+  animation: spin 10s linear infinite;
+}
+.hero-card__spin-border-dashed {
+  position: absolute;
+  top: 0.5rem; right: 0.5rem; bottom: 0.5rem; left: 0.5rem;
+  border-radius: 9999px;
+  border: 1px dashed rgba(244, 63, 94, 0.2);
+  animation: spin 15s linear infinite reverse;
+}
+
+/* Inner Photo Container */
+.hero-card__photo-inner {
+  width: 100%;
+  height: 100%;
+  background-color: #1a0f0f;
+  border-radius: 9999px;
+  overflow: hidden;
+  position: relative;
+}
+.hero-card__photo-anime,
+.hero-card__photo-real {
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  transition: opacity 500ms ease;
+}
+.hero-card__photo-anime {
+  opacity: 1;
+}
+.hero-card__photo-real {
+  opacity: 0;
+}
+.hero-card__image-section:hover .hero-card__photo-anime {
+  opacity: 0;
+}
+.hero-card__image-section:hover .hero-card__photo-real {
+  opacity: 1;
+}
+
+/* Fallback SVG */
+.hero-card__fallback-svg {
+  display: none;
+  width: 80%;
+  height: 80%;
+  color: rgba(136, 19, 55, 0.5);
+  position: absolute;
+  bottom: 0;
+  left: 10%;
+}
+
+/* Desktop Skill Radar Widget */
+.hero-card__skill-radar {
+  display: none;
+  flex-direction: column;
+  margin-top: 3rem;
+  margin-bottom: auto;
+  width: 100%;
+  max-width: 224px;
+  flex: 1 1 0%;
+}
+@media (min-width: 768px) {
+  .hero-card__skill-radar {
+    display: flex;
+  }
+}
+.hero-card__skill-radar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  padding: 0 0.25rem;
+}
+.hero-card__skill-radar-label {
+  font-size: 10px;
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.hero-card__skill-radar-live {
+  display: flex;
+  gap: 0.375rem;
+  align-items: center;
+}
+.hero-card__skill-radar-live-dot {
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: 9999px;
+  background-color: #10b981;
+  animation: pulse 2s ease-in-out infinite;
+}
+.hero-card__skill-radar-live-text {
+  font-size: 8px;
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+  color: #10b981;
+  text-transform: uppercase;
+}
+
+/* Metrics Box */
+.hero-card__metrics-box {
+  background-color: #1a0f0f;
+  border: 1px solid rgba(136, 19, 55, 0.3);
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  flex: 1 1 0%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: border-color 0.15s ease;
+}
+.hero-card__metrics-box:hover {
+  border-color: rgba(244, 63, 94, 0.4);
+}
+.hero-card__metrics-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+.hero-card__metric-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.hero-card__metric-label {
+  font-size: 10px;
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+  color: #94a3b8;
+  width: 3.5rem;
+  text-align: right;
+}
+.hero-card__metric-track {
+  flex: 1 1 0%;
+  height: 0.375rem;
+  background-color: #120a0a;
+  border-radius: 9999px;
+  overflow: hidden;
+}
+.hero-card__metric-fill {
+  height: 100%;
+  border-radius: 9999px;
+  transition: background-color 0.15s ease;
+}
+.hero-card__metric-fill--frontend {
+  width: 90%;
+  background-color: rgba(56, 189, 248, 0.8);
+}
+.hero-card__metrics-box:hover .hero-card__metric-fill--frontend {
+  background-color: #38bdf8;
+}
+.hero-card__metric-fill--backend {
+  width: 75%;
+  background-color: rgba(251, 113, 133, 0.8);
+}
+.hero-card__metrics-box:hover .hero-card__metric-fill--backend {
+  background-color: #fb7185;
+}
+.hero-card__metric-fill--aiml {
+  width: 60%;
+  background-color: rgba(251, 191, 36, 0.8);
+}
+.hero-card__metrics-box:hover .hero-card__metric-fill--aiml {
+  background-color: #fbbf24;
+}
+.hero-card__metric-fill--cyber {
+  width: 45%;
+  background-color: rgba(52, 211, 153, 0.8);
+}
+.hero-card__metrics-box:hover .hero-card__metric-fill--cyber {
+  background-color: #34d399;
+}
+
+/* Info Section */
+.hero-card__info {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1 1 0%;
+  align-items: center;
+  text-align: center;
+}
+@media (min-width: 768px) {
+  .hero-card__info {
+    align-items: flex-start;
+    text-align: left;
+  }
+}
+.hero-card__greeting {
+  color: #94a3b8;
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+.hero-card__name {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  margin-bottom: 1.5rem;
+  line-height: 1;
+}
+@media (min-width: 768px) {
+  .hero-card__name {
+    font-size: 3rem;
+  }
+}
+@media (min-width: 1024px) {
+  .hero-card__name {
+    font-size: 3.75rem;
+  }
+}
+.hero-card__name-first {
+  display: block;
+  color: #ffffff;
+}
+.hero-card__name-last {
+  display: block;
+  color: #fb7185;
+}
+
+/* Roles List */
+.hero-card__roles {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  align-items: center;
+}
+@media (min-width: 768px) {
+  .hero-card__roles {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    align-items: flex-start;
+  }
+}
+.hero-card__role-line {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.hero-card__role-arrow {
+  color: #34d399;
+}
+.hero-card__role-label {
+  color: #cbd5e1;
+}
+.hero-card__role-value {
+  color: #fb7185;
+}
+
+/* Bio */
+.hero-card__bio {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: #94a3b8;
+  margin-bottom: 2rem;
+  max-width: 24rem;
+  line-height: 1.625;
+  border-top: 2px solid rgba(136, 19, 55, 0.5);
+  border-left: none;
+  padding-top: 1rem;
+  padding-left: 0;
+  padding-top: 1rem;
+  padding-bottom: 0.25rem;
+}
+@media (min-width: 768px) {
+  .hero-card__bio {
+    border-top: none;
+    border-left: 2px solid rgba(136, 19, 55, 0.5);
+    padding-top: 0.25rem;
+    padding-left: 1rem;
+    padding-bottom: 0.25rem;
+  }
+}
+
+/* Social Links */
+.hero-card__socials {
+  display: flex;
+  gap: 1rem;
+}
+.hero-card__social-link {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.25rem;
+  background-color: #1a0f0f;
+  border: 1px solid rgba(136, 19, 55, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #94a3b8;
+  transition: color 0.15s ease, border-color 0.15s ease;
+  text-decoration: none;
+}
+.hero-card__social-link:hover {
+  color: #fb7185;
+  border-color: rgba(244, 63, 94, 0.5);
+}
+.hero-card__social-link svg {
+  width: 1rem;
+  height: 1rem;
+}

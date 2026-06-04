@@ -1,0 +1,122 @@
+.contact-terminal {
+  background-color: #120a0a;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  border: 1px solid rgba(136, 19, 55, 0.3);
+  border-bottom: 0;
+  padding: 1.5rem;
+  margin-top: 3rem;
+  width: 100%;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: hidden;
+}
+
+.contact-terminal__header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.contact-terminal__header-icon {
+  width: 1rem;
+  height: 1rem;
+  color: #fb7185;
+}
+
+.contact-terminal__header-title {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #cbd5e1;
+}
+
+.contact-terminal__prompt {
+  margin-bottom: 1.5rem;
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+.contact-terminal__prompt-user {
+  color: #34d399;
+}
+
+.contact-terminal__prompt-tilde {
+  color: #fb7185;
+}
+
+.contact-terminal__prompt-cmd {
+  color: #38bdf8;
+}
+
+.contact-terminal__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+@media (min-width: 640px) {
+  .contact-terminal__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .contact-terminal__grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+}
+
+.contact-terminal__item {
+  overflow: hidden;
+}
+
+.contact-terminal__item-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #64748b;
+  margin-bottom: 0.5rem;
+}
+
+.contact-terminal__item-label-icon {
+  width: 0.75rem;
+  height: 0.75rem;
+  color: #34d399;
+}
+
+.contact-terminal__item-value {
+  color: #cbd5e1;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.contact-terminal__item-value--link {
+  transition: color 0.15s ease;
+}
+
+.contact-terminal__item-value--link:hover {
+  color: #fb7185;
+}
+
+.contact-terminal__footer {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(136, 19, 55, 0.3);
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+  color: #64748b;
+  text-align: center;
+}

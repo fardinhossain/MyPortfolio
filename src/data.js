@@ -1,0 +1,99 @@
+export const RESUME_DATA = {
+  name: "Fardin Hossain",
+  fullName: "MD. FARDIN HOSSAIN",
+  role: "Aspiring Software Engineer & AI Enthusiast",
+  summary:
+    "Computer Science and Engineering student with hands-on experience in full-stack web development and AI applications. I build scalable web applications using the MERN stack and have experience with machine learning and cybersecurity projects. Passionate about integrating advanced technologies to solve real-world problems and continuously expanding my skills in software engineering.",
+  contact: {
+    phone: "01992748470",
+    email: "fardin.hosn@gmail.com",
+    linkedin: "https://www.linkedin.com/in/fardinhosn",
+    github: "https://github.com/fardinhossain",
+  },
+  education: [
+    {
+      degree: "Bachelor of Science (B.Sc.) in Computer Science and Engineering",
+      institution: "Southeast University",
+      period: "07/2023 - Present",
+      location: "Dhaka, Bangladesh",
+    },
+  ],
+  skills: {
+    programming: ["Python", "Java", "C/C++", "JavaScript"],
+    web: [
+      "React",
+      "Next.js",
+      "Node.js",
+      "Express.js",
+      "HTML",
+      "CSS",
+      "Tailwind CSS",
+    ],
+    dataCloud: ["MongoDB", "Firebase"],
+    ai: ["PyTorch", "Machine Learning", "Deep Learning"],
+    tools: ["Git", "GitHub", "REST API", "Postman", "Vercel", "Linux"],
+    cybersecurity: [
+      "Penetration Testing",
+      "Web Security",
+      "OWASP Top 10",
+      "API Security",
+    ],
+  },
+  projects: [
+    {
+      name: "LocationKhuji - AI-Powered Location Discovery",
+      period: "06/2026 - Present",
+      description:
+        "Full-stack AI-powered location search platform for discovering businesses and services across Bangladesh.",
+      achievements: [
+        "Implemented intelligent natural language search using LLM-based query understanding.",
+        "Built multi-layer AI fallback architecture.",
+        "Integrated geolocation services and map visualization.",
+      ],
+      link: "https://locationkhuji.vercel.app/",
+      tags: ["Next.js", "AI/ML", "Tailwind CSS", "MongoDB"]
+    },
+    {
+      name: "UniBuddy - Student Collaboration Platform",
+      period: "09/2025 - 10/2025",
+      description:
+        "Student-focused collaboration platform for communication and academic assistance.",
+      achievements: [
+        "Implemented authentication, user profiles, and interactive features.",
+        "Designed responsive UI and scalable backend.",
+      ],
+      link: "https://github.com/fardinhossain/Unibuddy_app",
+      tags: ["React", "Express", "Node.js", "MongoDB"]
+    },
+    {
+      name: "Skin Disease Classification",
+      period: "02/2026 - 03/2026",
+      description:
+        "Deep learning model for automated skin disease classification using Transfer Learning.",
+      achievements: [
+        "Applied transfer learning techniques to improve performance.",
+        "Performed dataset preprocessing, augmentation, and evaluation.",
+      ],
+      link: "https://github.com/fardinhossain/Skin-Disease-Classification-using-Transfer-Learning",
+      tags: ["Python", "PyTorch", "Deep Learning", "CNN"]
+    },
+    {
+      name: "Cybersecurity Assessment Project",
+      period: "04/2026 - 05/2026",
+      description:
+        "Conducted cybersecurity assessments and vulnerability analysis activities.",
+      achievements: [
+        "Applied security best practices and risk assessment methodologies.",
+      ],
+      link: "https://github.com/fardinhossain/cybersec-project-SEU-batch14-fardin",
+      tags: ["Pen Testing", "OWASP", "Linux", "Security"]
+    },
+  ],
+  certifications: [
+    "AI Engineer for Developers Associate (Datacamp)",
+    "Applied Penetration Testing Engineer: Hands-on (EDGE-CUET)",
+    "Microsoft Azure Developer Associate (AZ-204)",
+    "AWS Cloud Practitioner (CLF-C02)",
+    "IBM Generative AI Engineering Professional Certificate",
+  ],
+};
