@@ -129,15 +129,15 @@ export function initHeroCard() {
   // Define global synchronization function called by the Terminal typer
   window.syncHeroCardReveal = function(currentText, isSkipped) {
     const ids = [
-      { id: 'reveal-greeting', check: 'developer:' },
-      { id: 'reveal-name', check: 'developer:' },
-      { id: 'reveal-role-0', check: 'role:' },
-      { id: 'reveal-role-1', check: 'passion:' },
-      { id: 'reveal-role-2', check: 'skills:' },
-      { id: 'reveal-role-3', check: 'Full-Stack Development' },
-      { id: 'reveal-role-4', check: 'Cybersecurity' },
-      { id: 'reveal-bio', check: 'mission:' },
-      { id: 'reveal-socials', check: 'mission:' }
+      { id: 'reveal-greeting', check: 'greeting:' },
+      { id: 'reveal-name', check: 'name:' },
+      { id: 'reveal-role-0', check: 'Computer Science Student' },
+      { id: 'reveal-role-1', check: 'Aspiring Software Engineer' },
+      { id: 'reveal-role-2', check: 'AI Enthusiast' },
+      { id: 'reveal-role-3', check: 'Full-Stack Developer' },
+      { id: 'reveal-role-4', check: 'Cybersecurity Learner' },
+      { id: 'reveal-bio', check: 'bio:' },
+      { id: 'reveal-socials', check: 'bio:' }
     ];
 
     ids.forEach(({ id, check }) => {

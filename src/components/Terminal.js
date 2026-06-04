@@ -2,23 +2,18 @@ import './Terminal.css';
 import { iconPlay, iconFolderGit2, iconFastForward } from '../icons.js';
 
 const CODE_STRING = `// Welcome to my workspace
-import { Developer } from './universe.js';
 
-const Portfolio = () => {
-  return {
-    developer: {
-      name: "Md. Fardin Hossain",
-      role: "Software Engineer",
-      passion: "AI Engineer Enthusiast",
-      skills: [
-        "Full-Stack Development",
-        "Artificial Intelligence",
-        "Cybersecurity"
-      ],
-      mission: "Building intelligent solutions that create real impact",
-      status: "Open to Internships & Opportunities"
-    }
-  };
+const Profile = {
+  greeting: "Hello, I'm",
+  name: "MD. FARDIN HOSSAIN",
+  roles: [
+    "Computer Science Student",
+    "Aspiring Software Engineer",
+    "AI Enthusiast",
+    "Full-Stack Developer",
+    "Cybersecurity Learner"
+  ],
+  bio: "I build intelligent, scalable and secure solutions that solve real-world problems using modern technologies."
 };`;
 
 export function renderTerminal() {
@@ -104,7 +99,7 @@ export function initTerminal() {
           window.syncHeroCardReveal(CODE_STRING, true);
         }
       }
-    }, 45);
+    }, 18);
   }
 
   function stopTyping() {
