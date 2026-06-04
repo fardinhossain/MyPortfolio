@@ -461,19 +461,4 @@
   filter: blur(0);
 }
 
-/* Cyberpunk glow-glitch on reveal */
-@keyframes reveal-glow-glitch {
-  0% {
-    filter: blur(4px) drop-shadow(0 0 0px transparent);
-  }
-  30% {
-    filter: blur(2px) drop-shadow(0 0 12px rgba(244, 63, 94, 0.7)) drop-shadow(0 0 4px rgba(56, 189, 248, 0.5));
-  }
-  100% {
-    filter: blur(0) drop-shadow(0 0 0px transparent);
-  }
-}
 
-.hero-card__reveal--visible.hero-card__name {
-  animation: reveal-glow-glitch 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}

@@ -2,7 +2,6 @@ import './Terminal.css';
 import { iconPlay, iconFolderGit2, iconFastForward } from '../icons.js';
 
 const CODE_STRING = `// Welcome to my workspace
-
 const Profile = {
   greeting: "Hello, I'm",
   name: "MD. FARDIN HOSSAIN",
@@ -166,7 +165,7 @@ export function initTerminal() {
   );
 
   observer.observe(container);
-  
+
   // Start typing immediately on load/init
   startTyping();
 }
