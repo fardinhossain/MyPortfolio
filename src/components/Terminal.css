@@ -253,13 +253,28 @@
     height: 80vh;
     max-height: 520px;
     z-index: 2000;
-    background: rgba(18, 10, 10, 0.7) !important;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(244, 63, 94, 0.35);
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 40px rgba(244, 63, 94, 0.1);
+    background: rgba(15, 8, 8, 0.45) !important; /* Higher transparency */
+    backdrop-filter: blur(20px) !important;      /* Increased blur for frosted glass effect */
+    -webkit-backdrop-filter: blur(20px) !important;
+    border: 1px solid rgba(244, 63, 94, 0.3);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 30px rgba(244, 63, 94, 0.08);
     transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     opacity: 1;
+  }
+
+  .terminal.terminal--mobile-popup .terminal__title-bar {
+    background-color: rgba(26, 15, 15, 0.35) !important; /* Transparent title bar */
+    border-bottom: 1px solid rgba(244, 63, 94, 0.2);
+  }
+
+  .terminal.terminal--mobile-popup .terminal__action-btn--run {
+    background-color: rgba(76, 5, 25, 0.15) !important;
+    border: 1px solid rgba(244, 63, 94, 0.25);
+  }
+
+  .terminal.terminal--mobile-popup .terminal__action-btn--projects {
+    background-color: rgba(10, 6, 6, 0.25) !important;
+    border: 1px solid rgba(244, 63, 94, 0.15);
   }
 
   .terminal.terminal--mobile-popup.terminal--fade-out {
@@ -275,9 +290,9 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
+    background: rgba(0, 0, 0, 0.35); /* Slightly lighter overlay */
+    backdrop-filter: blur(8px);       /* Higher backdrop blur */
+    -webkit-backdrop-filter: blur(8px);
     z-index: 1999;
     opacity: 1;
     transition: opacity 0.4s ease;
