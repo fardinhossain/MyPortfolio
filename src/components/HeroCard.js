@@ -11,12 +11,12 @@ export function renderHeroCard() {
 
     <!-- Image Section -->
     <div class="hero-card__image-section">
-      <div class="hero-card__available-badge">
+      <div class="hero-card__available-badge hero-card__reveal" id="reveal-status">
         <div class="hero-card__available-dot"></div>
         Available
       </div>
 
-      <div class="hero-card__photo-ring">
+      <div class="hero-card__photo-ring hero-card__reveal" id="reveal-avatar">
         <div class="hero-card__spin-border"></div>
         <div class="hero-card__spin-border-dashed"></div>
 
@@ -38,7 +38,7 @@ export function renderHeroCard() {
       </div>
 
       <!-- Desktop-only Skill Radar -->
-      <div class="hero-card__skill-radar">
+      <div class="hero-card__skill-radar hero-card__reveal" id="reveal-radar">
         <div class="hero-card__skill-radar-header">
           <span class="hero-card__skill-radar-label">Skill Radar</span>
           <div class="hero-card__skill-radar-live">
@@ -129,6 +129,8 @@ export function initHeroCard() {
   // Define global synchronization function called by the Terminal typer
   window.syncHeroCardReveal = function(currentText, isSkipped) {
     const ids = [
+      { id: 'reveal-status', check: 'status:' },
+      { id: 'reveal-avatar', check: 'avatar:' },
       { id: 'reveal-greeting', check: 'greeting:' },
       { id: 'reveal-name', check: 'name:' },
       { id: 'reveal-role-0', check: 'Computer Science Student' },
@@ -136,8 +138,9 @@ export function initHeroCard() {
       { id: 'reveal-role-2', check: 'AI Enthusiast' },
       { id: 'reveal-role-3', check: 'Full-Stack Developer' },
       { id: 'reveal-role-4', check: 'Cybersecurity Learner' },
+      { id: 'reveal-radar', check: 'radarMetrics:' },
       { id: 'reveal-bio', check: 'bio:' },
-      { id: 'reveal-socials', check: 'bio:' }
+      { id: 'reveal-socials', check: 'socials:' }
     ];
 
     ids.forEach(({ id, check }) => {

@@ -6,6 +6,11 @@ const CODE_STRING = `// Welcome to my workspace
 const Profile = {
   greeting: "Hello, I'm",
   name: "MD. FARDIN HOSSAIN",
+  avatar: {
+    anime: "/fardin-anime.png",
+    real: "/fardin-real.png"
+  },
+  status: "Available for Opportunities",
   roles: [
     "Computer Science Student",
     "Aspiring Software Engineer",
@@ -13,7 +18,18 @@ const Profile = {
     "Full-Stack Developer",
     "Cybersecurity Learner"
   ],
-  bio: "I build intelligent, scalable and secure solutions that solve real-world problems using modern technologies."
+  radarMetrics: {
+    frontend: "90%",
+    backend: "75%",
+    aiml: "60%",
+    cybersecurity: "45%"
+  },
+  bio: "I build intelligent, scalable and secure solutions that solve real-world problems using modern technologies.",
+  socials: {
+    github: "github.com/fardinhossain",
+    linkedin: "linkedin.com/in/fardinhosn",
+    email: "fardin.hosn@gmail.com"
+  }
 };`;
 
 export function renderTerminal() {

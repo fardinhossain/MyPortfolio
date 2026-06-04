@@ -195,11 +195,23 @@ ul, ol {
   scroll-margin-top: 6rem;
   min-width: 0;
 }
+.grid-top-row .terminal {
+  order: 1;
+}
+.grid-top-row .hero-card {
+  order: 2;
+}
 
 @media (min-width: 1024px) {
   .grid-top-row {
     grid-template-columns: 1fr 1.1fr;
     gap: 2rem;
+  }
+  .grid-top-row .terminal {
+    order: unset;
+  }
+  .grid-top-row .hero-card {
+    order: unset;
   }
 }
 
