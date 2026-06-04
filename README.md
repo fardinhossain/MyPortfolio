@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Md. Fardin Hossain — Software Engineering Portfolio
 
 [![Node.js Version](https://img.shields.io/badge/Node.js-v18+-339933?style=flat-square&logo=node.js&logoColor=white)](https://nodejs.org/)
@@ -15,6 +16,8 @@ A high-performance, single-page application built to demonstrate my expertise in
 ## 🏗️ Architecture & Technologies
 
 The application is built on a modern JavaScript stack, utilizing component-based UI rendering without the overhead of heavy frontend frameworks.
+=======
+>>>>>>> 23903c02845ff00222bfb640517f955504a3e923
 
 - **Frontend:** HTML5, CSS3, ES6+ JavaScript Modules
 - **Backend API:** Node.js, Express.js
