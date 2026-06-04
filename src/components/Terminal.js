@@ -81,6 +81,11 @@ export function initTerminal() {
       typedText = CODE_STRING.slice(0, currentIndex);
       codeEl.textContent = typedText + '▋';
 
+      // Sync character reveal
+      if (typeof window.syncHeroCardReveal === 'function') {
+        window.syncHeroCardReveal(typedText, false);
+      }
+
       // Re-highlight each frame
       if (typeof Prism !== 'undefined') {
         Prism.highlightElement(codeEl);
@@ -94,6 +99,9 @@ export function initTerminal() {
         codeEl.textContent = typedText;
         if (typeof Prism !== 'undefined') {
           Prism.highlightElement(codeEl);
+        }
+        if (typeof window.syncHeroCardReveal === 'function') {
+          window.syncHeroCardReveal(CODE_STRING, true);
         }
       }
     }, 45);
@@ -114,6 +122,9 @@ export function initTerminal() {
     codeEl.textContent = typedText;
     if (typeof Prism !== 'undefined') {
       Prism.highlightElement(codeEl);
+    }
+    if (typeof window.syncHeroCardReveal === 'function') {
+      window.syncHeroCardReveal(CODE_STRING, true);
     }
   }
 
@@ -136,6 +147,9 @@ export function initTerminal() {
           currentIndex = 0;
           codeEl.textContent = '';
           skipBtn.style.display = 'none';
+          if (typeof window.syncHeroCardReveal === 'function') {
+            window.syncHeroCardReveal('', false);
+          }
         }
       });
     },

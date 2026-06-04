@@ -80,25 +80,25 @@ export function renderHeroCard() {
 
     <!-- Info Section -->
     <div class="hero-card__info">
-      <h3 class="hero-card__greeting">Hello, I'm</h3>
-      <h1 class="hero-card__name">
+      <h3 class="hero-card__greeting hero-card__reveal" id="reveal-greeting">Hello, I'm</h3>
+      <h1 class="hero-card__name hero-card__reveal" id="reveal-name">
         <span class="hero-card__name-first">MD. FARDIN</span>
         <span class="hero-card__name-last">HOSSAIN</span>
       </h1>
 
       <div class="hero-card__roles">
-        <p class="hero-card__role-line"><span class="hero-card__role-arrow">&gt;</span> <span class="hero-card__role-label">Computer Science</span> <span class="hero-card__role-value">Student</span></p>
-        <p class="hero-card__role-line"><span class="hero-card__role-arrow">&gt;</span> <span class="hero-card__role-label">Aspiring</span> <span class="hero-card__role-value">Software Engineer</span></p>
-        <p class="hero-card__role-line"><span class="hero-card__role-arrow">&gt;</span> <span class="hero-card__role-label">AI</span> <span class="hero-card__role-value">Enthusiast</span></p>
-        <p class="hero-card__role-line"><span class="hero-card__role-arrow">&gt;</span> <span class="hero-card__role-label">Full-Stack</span> <span class="hero-card__role-value">Developer</span></p>
-        <p class="hero-card__role-line"><span class="hero-card__role-arrow">&gt;</span> <span class="hero-card__role-label">Cybersecurity</span> <span class="hero-card__role-value">Learner</span></p>
+        <p class="hero-card__role-line hero-card__reveal" id="reveal-role-0"><span class="hero-card__role-arrow">&gt;</span> <span class="hero-card__role-label">Computer Science</span> <span class="hero-card__role-value">Student</span></p>
+        <p class="hero-card__role-line hero-card__reveal" id="reveal-role-1"><span class="hero-card__role-arrow">&gt;</span> <span class="hero-card__role-label">Aspiring</span> <span class="hero-card__role-value">Software Engineer</span></p>
+        <p class="hero-card__role-line hero-card__reveal" id="reveal-role-2"><span class="hero-card__role-arrow">&gt;</span> <span class="hero-card__role-label">AI</span> <span class="hero-card__role-value">Enthusiast</span></p>
+        <p class="hero-card__role-line hero-card__reveal" id="reveal-role-3"><span class="hero-card__role-arrow">&gt;</span> <span class="hero-card__role-label">Full-Stack</span> <span class="hero-card__role-value">Developer</span></p>
+        <p class="hero-card__role-line hero-card__reveal" id="reveal-role-4"><span class="hero-card__role-arrow">&gt;</span> <span class="hero-card__role-label">Cybersecurity</span> <span class="hero-card__role-value">Learner</span></p>
       </div>
 
-      <p class="hero-card__bio">
+      <p class="hero-card__bio hero-card__reveal" id="reveal-bio">
         I build intelligent, scalable and secure solutions that solve real-world problems using modern technologies.
       </p>
 
-      <div class="hero-card__socials">
+      <div class="hero-card__socials hero-card__reveal" id="reveal-socials">
         <a href="#contact" class="hero-card__social-link">${iconGithub(16, 'hero-icon-github')}</a>
         <a href="#contact" class="hero-card__social-link">${iconLinkedin(16, 'hero-icon-linkedin')}</a>
         <a href="#contact" class="hero-card__social-link">${iconMail(16, 'hero-icon-mail')}</a>
@@ -125,4 +125,30 @@ export function initHeroCard() {
       realImg.style.display = 'none';
     });
   }
+
+  // Define global synchronization function called by the Terminal typer
+  window.syncHeroCardReveal = function(currentText, isSkipped) {
+    const ids = [
+      { id: 'reveal-greeting', check: 'developer:' },
+      { id: 'reveal-name', check: 'developer:' },
+      { id: 'reveal-role-0', check: 'role:' },
+      { id: 'reveal-role-1', check: 'passion:' },
+      { id: 'reveal-role-2', check: 'skills:' },
+      { id: 'reveal-role-3', check: 'Full-Stack Development' },
+      { id: 'reveal-role-4', check: 'Cybersecurity' },
+      { id: 'reveal-bio', check: 'mission:' },
+      { id: 'reveal-socials', check: 'mission:' }
+    ];
+
+    ids.forEach(({ id, check }) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+
+      if (isSkipped || currentText.includes(check)) {
+        el.classList.add('hero-card__reveal--visible');
+      } else {
+        el.classList.remove('hero-card__reveal--visible');
+      }
+    });
+  };
 }
