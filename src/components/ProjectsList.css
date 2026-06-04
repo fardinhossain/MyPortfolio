@@ -127,6 +127,7 @@
   border-radius: 0.5rem;
   border: 1px solid rgba(244, 63, 94, 0.3);
   cursor: pointer;
+  text-decoration: none;
 }
 
 .projects__view-all-btn:hover {

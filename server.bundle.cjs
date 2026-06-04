@@ -31,8 +31,21 @@ var import_cors = __toESM(require("cors"), 1);
 var import_express_rate_limit = __toESM(require("express-rate-limit"), 1);
 async function startServer() {
   const app = (0, import_express.default)();
-  const PORT = 3e3;
-  app.use((0, import_helmet.default)());
+  const PORT = process.env.PORT || 3e3;
+  app.use(
+    (0, import_helmet.default)({
+      contentSecurityPolicy: {
+        directives: {
+          defaultSrc: ["'self'"],
+          scriptSrc: ["'self'", "'unsafe-inline'", "https://cdnjs.cloudflare.com"],
+          styleSrc: ["'self'", "'unsafe-inline'", "https://cdnjs.cloudflare.com", "https://fonts.googleapis.com"],
+          fontSrc: ["'self'", "https://fonts.gstatic.com"],
+          connectSrc: ["'self'", "https://api.github.com"],
+          imgSrc: ["'self'", "data:", "https://github.com", "https://api.github.com"]
+        }
+      }
+    })
+  );
   app.use((0, import_cors.default)());
   app.use(import_express.default.json());
   const chatLimiter = (0, import_express_rate_limit.default)({

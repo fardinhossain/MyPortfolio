@@ -20,9 +20,9 @@ export function renderProjectsList() {
             </p>
           </div>
         </div>
-        <button class="projects__view-all-btn">
+        <a href="https://github.com/fardinhossain?tab=repositories" target="_blank" rel="noopener noreferrer" class="projects__view-all-btn">
           View All Projects ${iconArrowRight(16, 'projects__arrow-icon')}
-        </button>
+        </a>
       </div>
 
       <div class="projects__grid">
