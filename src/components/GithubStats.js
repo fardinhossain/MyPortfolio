@@ -92,7 +92,7 @@ export function initGithubStats() {
       console.error('Failed to fetch GitHub stats:', error);
       // Realistic fallback data for Fardin Hossain when API rate limits are hit
       stats = {
-        repos: 7,
+        repos: 8,
         stars: 1,
       };
       languages = [
