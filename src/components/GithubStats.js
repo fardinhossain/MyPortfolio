@@ -44,6 +44,10 @@ export function initGithubStats() {
         fetch(`https://api.github.com/users/${username}/repos?per_page=100`),
       ]);
 
+      if (!userRes.ok || !reposRes.ok) {
+        throw new Error(`GitHub API error: user status ${userRes.status}, repos status ${reposRes.status}`);
+      }
+
       const userData = await userRes.json();
       const reposData = await reposRes.json();
 
