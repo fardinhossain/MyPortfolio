@@ -93,7 +93,7 @@ export function initGithubStats() {
       // Realistic fallback data for Fardin Hossain when API rate limits are hit
       stats = {
         repos: 8,
-        stars: 5,
+        stars: 20,
       };
       languages = [
         { name: 'JS', value: 40, color: '#10b981' },
