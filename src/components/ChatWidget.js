@@ -19,7 +19,7 @@ export function renderChatWidget() {
       <!-- Messages -->
       <div class="chat-widget__messages chat-scrollbar" id="chat-messages">
         <div class="chat-widget__message chat-widget__message--ai">
-          👋 Hi! I'm Fardin AI. Ask me anything about Fardin's skills, projects or experience.
+          👋 Hi! I'm Fardin's AI assistant. Ask me anything about Fardin's skills, projects or experience.
         </div>
       </div>
 
@@ -55,7 +55,7 @@ export function initChatWidget() {
 
   // State managed via closures
   let messages = [
-    { role: 'ai', text: "👋 Hi! I'm Fardin AI. Ask me anything about Fardin's skills, projects or experience." },
+    { role: 'ai', text: "👋 Hi! I'm Fardin's AI assistant. Ask me anything about Fardin's skills, projects or experience." },
   ];
   let isLoading = false;
 
