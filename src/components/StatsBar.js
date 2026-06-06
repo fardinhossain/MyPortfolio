@@ -5,7 +5,7 @@ export function renderStatsBar() {
   const stats = [
     { value: '3+', label: 'Projects Completed', iconFn: iconCode2 },
     { value: 'Software Engineer', label: 'Focused', iconFn: iconCode2 },
-    { value: 'AI Engineer', label: 'Enthusiast', iconFn: iconBrainCircuit },
+    { value: 'AI & ML Engineer', label: 'Enthusiast', iconFn: iconBrainCircuit },
     { value: 'B.Sc. in CSE', label: 'Southeast University', iconFn: iconGraduationCap },
   ];
 

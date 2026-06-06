@@ -1,7 +1,7 @@
 export const RESUME_DATA = {
   name: "Fardin Hossain",
   fullName: "MD. FARDIN HOSSAIN",
-  role: "Aspiring Software Engineer & AI Enthusiast",
+  role: "Aspiring Software Engineer & AI & ML Enthusiast",
   summary:
     "Computer Science and Engineering student with hands-on experience in full-stack web development and AI applications. I build scalable web applications using the MERN stack and have experience with machine learning and cybersecurity projects. Passionate about integrating advanced technologies to solve real-world problems and continuously expanding my skills in software engineering.",
   contact: {

@@ -89,7 +89,7 @@ export function renderHeroCard() {
       <div class="hero-card__roles">
         <p class="hero-card__role-line hero-card__reveal" id="reveal-role-0"><span class="hero-card__role-arrow">&gt;</span> <span class="hero-card__role-label">Computer Science</span> <span class="hero-card__role-value">Student</span></p>
         <p class="hero-card__role-line hero-card__reveal" id="reveal-role-1"><span class="hero-card__role-arrow">&gt;</span> <span class="hero-card__role-label">Aspiring</span> <span class="hero-card__role-value">Software Engineer</span></p>
-        <p class="hero-card__role-line hero-card__reveal" id="reveal-role-2"><span class="hero-card__role-arrow">&gt;</span> <span class="hero-card__role-label">AI</span> <span class="hero-card__role-value">Enthusiast</span></p>
+        <p class="hero-card__role-line hero-card__reveal" id="reveal-role-2"><span class="hero-card__role-arrow">&gt;</span> <span class="hero-card__role-label">AI & ML</span> <span class="hero-card__role-value">Enthusiast</span></p>
         <p class="hero-card__role-line hero-card__reveal" id="reveal-role-3"><span class="hero-card__role-arrow">&gt;</span> <span class="hero-card__role-label">Full-Stack</span> <span class="hero-card__role-value">Developer</span></p>
         <p class="hero-card__role-line hero-card__reveal" id="reveal-role-4"><span class="hero-card__role-arrow">&gt;</span> <span class="hero-card__role-label">Cybersecurity</span> <span class="hero-card__role-value">Learner</span></p>
       </div>
@@ -135,7 +135,7 @@ export function initHeroCard() {
       { id: 'reveal-name', check: 'name:' },
       { id: 'reveal-role-0', check: 'Computer Science Student' },
       { id: 'reveal-role-1', check: 'Aspiring Software Engineer' },
-      { id: 'reveal-role-2', check: 'AI Enthusiast' },
+      { id: 'reveal-role-2', check: 'AI & ML Enthusiast' },
       { id: 'reveal-role-3', check: 'Full-Stack Developer' },
       { id: 'reveal-role-4', check: 'Cybersecurity Learner' },
       { id: 'reveal-radar', check: 'avatar:' }, // Arrives after/with profile pic

@@ -35,7 +35,7 @@ export async function handler(event) {
     Here is the information about Fardin you must strictly use:
     - Full Name: Md. Fardin Hossain
     - Role: Software Engineer
-    - Passion: AI Engineer Enthusiast
+    - Passion: AI & ML Engineer Enthusiast
     - Skills: Full-Stack Development, Artificial Intelligence, Cybersecurity, Javascript, Java, HTML
     - Mission: Building intelligent solutions that create real impact
     - Status: Open to Internships & Opportunities

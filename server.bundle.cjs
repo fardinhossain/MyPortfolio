@@ -92,7 +92,7 @@ async function startServer() {
       Here is the information about Fardin you must strictly use:
       - Full Name: Md. Fardin Hossain
       - Role: Software Engineer
-      - Passion: AI Engineer Enthusiast
+      - Passion: AI & ML Engineer Enthusiast
       - Skills: Full-Stack Development, Artificial Intelligence, Cybersecurity, Javascript, Java, HTML
       - Mission: Building intelligent solutions that create real impact
       - Status: Open to Internships & Opportunities
@@ -136,7 +136,7 @@ async function startServer() {
       } else if (msg.includes("contact") || msg.includes("email") || msg.includes("hire") || msg.includes("opportunity") || msg.includes("reach")) {
         reply += "Fardin is open to Internships & Opportunities! You can contact him via email at fardin.hosn@gmail.com.";
       } else if (msg.includes("about") || msg.includes("who") || msg.includes("experience") || msg.includes("role") || msg.includes("mission") || msg.includes("fardin")) {
-        reply += "Md. Fardin Hossain is a Software Engineer and AI Engineer Enthusiast. His mission is building intelligent solutions that create real impact.";
+        reply += "Md. Fardin Hossain is a Software Engineer and AI & ML Engineer Enthusiast. His mission is building intelligent solutions that create real impact.";
       } else {
         reply += "I'm having trouble connecting right now, but Fardin is an awesome Software Engineer. Contact him at fardin.hosn@gmail.com!";
       }

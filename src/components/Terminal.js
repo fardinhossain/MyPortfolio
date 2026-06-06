@@ -11,7 +11,7 @@ const Profile = {
   roles: [
     "Computer Science Student",
     "Aspiring Software Engineer",
-    "AI Enthusiast",
+    "AI & ML Enthusiast",
     "Full-Stack Developer",
     "Cybersecurity Learner"
   ],
