@@ -267,6 +267,49 @@ body.certificate-modal-open {
   padding: clamp(0.75rem, 2vw, 1.25rem);
 }
 
+.certificate-modal__meta {
+  display: grid;
+  gap: 0.2rem;
+  padding: 0.25rem 3rem 0.85rem 0.25rem;
+}
+
+.certificate-modal__eyebrow {
+  font-size: 0.68rem;
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+  color: #34d399;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.certificate-modal__name {
+  font-size: 1rem;
+  line-height: 1.35;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.certificate-modal__issuer {
+  min-height: 1.1rem;
+  font-size: 0.8rem;
+  color: #94a3b8;
+}
+
+.certificate-modal__image-frame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(203, 213, 225, 0.16);
+  background-color: #050505;
+}
+
+.certificate-modal__image {
+  width: 100%;
+  max-height: calc(100dvh - 8.5rem);
+  object-fit: contain;
+}
+
 .certificate-modal__title {
   position: absolute;
   width: 1px;
@@ -547,6 +590,22 @@ body.certificate-modal-open {
   .certificate-modal__close {
     top: 0.5rem;
     right: 0.5rem;
+  }
+
+  .certificate-modal__meta {
+    padding: 0.25rem 2.75rem 0.75rem 0;
+  }
+
+  .certificate-modal__name {
+    font-size: 0.9rem;
+  }
+
+  .certificate-modal__issuer {
+    font-size: 0.75rem;
+  }
+
+  .certificate-modal__image {
+    max-height: calc(100dvh - 7.5rem);
   }
 
   .certificate-paper {

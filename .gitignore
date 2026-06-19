@@ -6,3 +6,8 @@ coverage/
 *.log
 .env*
 !.env.example
+
+# Local report artifacts
+*Report*.docx
+~$*.docx
+report_assets/

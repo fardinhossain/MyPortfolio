@@ -6,6 +6,12 @@ function getCertificationTitle(cert) {
   return typeof cert === 'string' ? cert : cert.title;
 }
 
+function getCertificateEntries() {
+  return RESUME_DATA.certifications.filter(
+    cert => typeof cert === 'object' && cert.certificate
+  );
+}
+
 function renderCertificationCard(cert) {
   const title = getCertificationTitle(cert);
   const hasCertificate = typeof cert === 'object' && cert.certificate;
@@ -40,61 +46,10 @@ function renderCertificationCard(cert) {
   return `<div class="certs__card">${cardContent}</div>`;
 }
 
-function renderCertificateArtwork(cert) {
-  return `
-    <article class="certificate-paper" aria-label="${cert.title} certificate">
-      <div class="certificate-paper__pattern" aria-hidden="true"></div>
-
-      <div class="certificate-paper__top">
-        <div class="certificate-paper__official">
-          <span>OFFICIAL</span>
-          <strong>CERTIFICATION</strong>
-        </div>
-
-        <div class="certificate-paper__brand" aria-label="${cert.issuer}">
-          <strong>mile<span>2</span></strong>
-          <p>CYBERSECURITY CERTIFICATIONS</p>
-        </div>
-      </div>
-
-      <div class="certificate-paper__rule"></div>
-
-      <p class="certificate-paper__statement">THIS DOCUMENT CERTIFIES THAT</p>
-      <div class="certificate-paper__name">${cert.recipient}</div>
-
-      <p class="certificate-paper__statement">HAS ATTAINED THE DESIGNATION OF</p>
-      <div class="certificate-paper__designation">${cert.title}</div>
-
-      <div class="certificate-paper__meta">
-        <div>
-          <p>DATE: <span>${cert.date}</span></p>
-          <p>CERTIFICATE ID#: <span>${cert.certificateId}</span></p>
-        </div>
-        <p>VALID THROUGH: <span>${cert.validThrough}</span></p>
-      </div>
-
-      <div class="certificate-paper__footer">
-        <div class="certificate-paper__signature">
-          <strong>Raymond Friedman</strong>
-          <span>CEO &amp; President</span>
-        </div>
-        <div class="certificate-paper__badges" aria-hidden="true">
-          <span>FBI</span>
-          <span>CNSS</span>
-          <span>NST</span>
-          <span>NICCS</span>
-        </div>
-      </div>
-    </article>
-  `;
-}
-
 function renderCertificateModal() {
-  const certificate = RESUME_DATA.certifications.find(
-    cert => typeof cert === 'object' && cert.certificate
-  );
+  const certificates = getCertificateEntries();
 
-  if (!certificate) return '';
+  if (!certificates.length) return '';
 
   return `
     <div
@@ -118,9 +73,16 @@ function renderCertificateModal() {
 
         <div class="certificate-modal__viewport">
           <h3 id="certificate-modal-title" class="certificate-modal__title">
-            ${certificate.title}
+            Certificate Preview
           </h3>
-          ${renderCertificateArtwork(certificate)}
+          <div class="certificate-modal__meta">
+            <p class="certificate-modal__eyebrow">Verified Certificate</p>
+            <p class="certificate-modal__name" data-certificate-title></p>
+            <p class="certificate-modal__issuer" data-certificate-issuer></p>
+          </div>
+          <div class="certificate-modal__image-frame">
+            <img class="certificate-modal__image" src="" alt="" data-certificate-image>
+          </div>
         </div>
       </div>
     </div>
@@ -157,8 +119,16 @@ export function initCertificationsBox() {
 
   if (!modal || !triggers.length) return;
 
+  const certificatesById = new Map(
+    getCertificateEntries().map(certificate => [certificate.id, certificate])
+  );
   const closeButton = modal.querySelector('[data-certificate-close]');
+  const title = modal.querySelector('[data-certificate-title]');
+  const issuer = modal.querySelector('[data-certificate-issuer]');
+  const image = modal.querySelector('[data-certificate-image]');
   let previousFocus = null;
+
+  if (!closeButton || !title || !issuer || !image) return;
 
   const getFocusableElements = () => Array.from(
     modal.querySelectorAll(
@@ -176,8 +146,15 @@ export function initCertificationsBox() {
     }
   };
 
-  const openModal = () => {
+  const openModal = certificate => {
+    if (!certificate?.certificateImage) return;
+
     previousFocus = document.activeElement;
+    title.textContent = certificate.title;
+    issuer.textContent = certificate.issuer || '';
+    image.src = certificate.certificateImage;
+    image.alt = certificate.certificateAlt || `${certificate.title} certificate`;
+
     modal.classList.add('is-open');
     modal.setAttribute('aria-hidden', 'false');
     document.body.classList.add('certificate-modal-open');
@@ -185,7 +162,9 @@ export function initCertificationsBox() {
   };
 
   triggers.forEach(trigger => {
-    trigger.addEventListener('click', openModal);
+    trigger.addEventListener('click', () => {
+      openModal(certificatesById.get(trigger.dataset.certificateTrigger));
+    });
   });
 
   modal.addEventListener('click', event => {
