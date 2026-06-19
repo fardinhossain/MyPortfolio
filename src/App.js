@@ -75,6 +75,7 @@ export async function initApp() {
   const { initSkillsDashboard } = await import('./components/SkillsDashboard.js');
   const { initGithubStats } = await import('./components/GithubStats.js');
   const { initChatWidget } = await import('./components/ChatWidget.js');
+  const { initCertificationsBox } = await import('./components/CertificationsBox.js');
 
   // Initialize interactive components
   if (typeof initHeroCard === 'function') initHeroCard();
@@ -82,4 +83,5 @@ export async function initApp() {
   if (typeof initSkillsDashboard === 'function') initSkillsDashboard();
   if (typeof initGithubStats === 'function') initGithubStats();
   if (typeof initChatWidget === 'function') initChatWidget();
+  if (typeof initCertificationsBox === 'function') initCertificationsBox();
 }

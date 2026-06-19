@@ -51,6 +51,8 @@ export const RESUME_DATA = {
         "Integrated geolocation services and map visualization.",
       ],
       link: "https://locationkhuji.vercel.app/",
+      previewImage: "/projects/locationkhuji.png",
+      previewAlt: "LocationKhuji web app homepage with search controls and Bangladesh map",
       tags: ["Next.js", "AI/ML", "Tailwind CSS", "MongoDB"]
     },
     {
@@ -63,6 +65,8 @@ export const RESUME_DATA = {
         "Designed responsive UI and scalable backend.",
       ],
       link: "https://github.com/fardinhossain/Unibuddy_app",
+      previewImage: "/projects/unibuddy-app.png",
+      previewAlt: "UniBuddy app preview showing login, home, and profile mobile screens",
       tags: ["React", "Express", "Node.js", "MongoDB"]
     },
     {
@@ -90,6 +94,16 @@ export const RESUME_DATA = {
     },
   ],
   certifications: [
+    {
+      id: "cpte-mile2",
+      title: "C)PTE: Certified Penetration Testing Engineer",
+      issuer: "mile2 Cybersecurity Certifications",
+      recipient: "Md. Fardin Hossain",
+      date: "06/11/2026",
+      validThrough: "06/10/2029",
+      certificateId: "30110-178-117-3002",
+      certificate: true,
+    },
     "AI Engineer for Developers Associate (Datacamp)",
     "Applied Penetration Testing Engineer: Hands-on (EDGE-CUET)",
     "Microsoft Azure Developer Associate (AZ-204)",

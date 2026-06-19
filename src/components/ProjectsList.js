@@ -26,34 +26,42 @@ export function renderProjectsList() {
       </div>
 
       <div class="projects__grid">
-        ${RESUME_DATA.projects.map((project, index) => `
-          <div class="projects__card">
+        ${RESUME_DATA.projects.map(project => `
+          <div class="projects__card ${project.previewImage ? 'projects__card--has-preview' : ''}">
             <div class="projects__card-glow-line"></div>
 
-            <div class="projects__card-top">
-              <span class="projects__card-year">
-                ${project.period.substring(3, 7) || '2025'}
-              </span>
-              <a href="${project.link}" class="projects__card-link-btn">
-                ${iconExternalLink(16, 'projects__card-link-icon')}
-              </a>
-            </div>
+            ${project.previewImage ? `
+              <div class="projects__card-preview">
+                <img src="${project.previewImage}" alt="${project.previewAlt || `${project.name} preview`}" loading="lazy">
+              </div>
+            ` : ''}
 
-            <h3 class="projects__card-name">
-              ${project.name.split(' - ')[0]}
-            </h3>
+            <div class="projects__card-content">
+              <div class="projects__card-top">
+                <span class="projects__card-year">
+                  ${project.period.substring(3, 7) || '2025'}
+                </span>
+                <a href="${project.link}" class="projects__card-link-btn">
+                  ${iconExternalLink(16, 'projects__card-link-icon')}
+                </a>
+              </div>
 
-            <p class="projects__card-desc">
-              ${project.description}
-            </p>
+              <h3 class="projects__card-name">
+                ${project.name.split(' - ')[0]}
+              </h3>
 
-            <div class="projects__card-tags-wrap">
-              <div class="projects__card-tags">
-                ${(project.tags || []).map((tag, i) => `
-                  <span class="projects__card-tag ${i % 3 === 0 ? 'projects__card-tag--emerald' : i % 3 === 1 ? 'projects__card-tag--sky' : 'projects__card-tag--amber'}">
-                    ${tag === 'AI/ML' ? iconCpu(12, 'projects__card-tag-icon') : ''} ${tag}
-                  </span>
-                `).join('')}
+              <p class="projects__card-desc">
+                ${project.description}
+              </p>
+
+              <div class="projects__card-tags-wrap">
+                <div class="projects__card-tags">
+                  ${(project.tags || []).map((tag, i) => `
+                    <span class="projects__card-tag ${i % 3 === 0 ? 'projects__card-tag--emerald' : i % 3 === 1 ? 'projects__card-tag--sky' : 'projects__card-tag--amber'}">
+                      ${tag === 'AI/ML' ? iconCpu(12, 'projects__card-tag-icon') : ''} ${tag}
+                    </span>
+                  `).join('')}
+                </div>
               </div>
             </div>
           </div>
