@@ -39,6 +39,7 @@ The portfolio is designed to feel like a developer workspace: dark interface, te
 | Certifications | Displays verified certifications with responsive certificate image popups. |
 | Contact terminal | Provides contact links and a secure email message form in a developer-themed section. |
 | Tic-tac-toe AI | Lets visitors play an interactive round against a local minimax AI. |
+| Motion system | Adds eased desktop scrolling and a responsive terminal-style custom cursor. |
 
 ## Tech Stack
 

@@ -68,8 +68,13 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 2rem;
   overflow-x: hidden;
   width: 100%;
+}
+
+html.smooth-scroll-active {
+  scroll-behavior: auto;
 }
 
 body {
@@ -289,4 +294,10 @@ ul, ol {
 svg {
   display: inline-block;
   vertical-align: middle;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }

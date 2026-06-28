@@ -9,6 +9,7 @@ import './components/ExperienceRoadmap.css';
 import './components/CertificationsBox.css';
 import './components/ChatWidget.css';
 import './components/ContactTerminal.css';
+import './components/CustomCursor.css';
 
 import { renderNavigation } from './components/Navigation.js';
 import { renderHeroCard } from './components/HeroCard.js';
@@ -77,6 +78,8 @@ export async function initApp() {
   const { initChatWidget } = await import('./components/ChatWidget.js');
   const { initCertificationsBox } = await import('./components/CertificationsBox.js');
   const { initContactTerminal } = await import('./components/ContactTerminal.js');
+  const { initCustomCursor } = await import('./components/CustomCursor.js');
+  const { initSmoothScroll } = await import('./components/SmoothScroll.js');
 
   // Initialize interactive components
   if (typeof initHeroCard === 'function') initHeroCard();
@@ -86,4 +89,6 @@ export async function initApp() {
   if (typeof initChatWidget === 'function') initChatWidget();
   if (typeof initCertificationsBox === 'function') initCertificationsBox();
   if (typeof initContactTerminal === 'function') initContactTerminal();
+  if (typeof initCustomCursor === 'function') initCustomCursor();
+  if (typeof initSmoothScroll === 'function') initSmoothScroll();
 }
