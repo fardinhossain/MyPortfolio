@@ -1,7 +1,7 @@
 const RIFF_HEADER_SIZE = 12;
 const CHUNK_HEADER_SIZE = 8;
 const JIFFY_DURATION_MS = 1000 / 60;
-const CURSOR_SIZE = 16;
+const CURSOR_SIZE = 32;
 const INTERACTIVE_SELECTOR = 'a, button, select, input[type="button"], input[type="submit"], input[type="reset"], input[type="checkbox"], input[type="radio"], [role="button"], [role="gridcell"], [tabindex]:not([tabindex="-1"])';
 
 function readFourCC(view, offset) {
