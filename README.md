@@ -1,98 +1,143 @@
+# Md. Fardin Hossain | Portfolio Website
 
-# Md. Fardin Hossain — Software Engineering Portfolio
+<p align="center">
+  <img src="public/readme/portfolio-preview.png" alt="Md. Fardin Hossain portfolio website preview" width="100%" />
+</p>
 
-[![Node.js Version](https://img.shields.io/badge/Node.js-v18+-339933?style=flat-square&logo=node.js&logoColor=white)](https://nodejs.org/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
-[![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite&logoColor=white)](https://vitejs.dev/)
-[![Express.js](https://img.shields.io/badge/Express.js-000000?style=flat-square&logo=express&logoColor=white)](https://expressjs.com/)
+<p align="center">
+  <a href="https://mdfardin.vercel.app/"><strong>Live Website</strong></a>
+  &nbsp;|&nbsp;
+  <a href="https://github.com/fardinhossain"><strong>GitHub</strong></a>
+  &nbsp;|&nbsp;
+  <a href="https://www.linkedin.com/in/fardinhosn"><strong>LinkedIn</strong></a>
+  &nbsp;|&nbsp;
+  <a href="mailto:fardin.hosn@gmail.com"><strong>Email</strong></a>
+</p>
 
-**Software Engineer | Full-Stack Developer | AI Integration Specialist**
+<p align="center">
+  <img src="https://img.shields.io/badge/JavaScript-ES%20Modules-f7df1e?style=for-the-badge&logo=javascript&logoColor=111111" alt="JavaScript badge" />
+  <img src="https://img.shields.io/badge/Vite-Build%20Tool-646cff?style=for-the-badge&logo=vite&logoColor=ffffff" alt="Vite badge" />
+  <img src="https://img.shields.io/badge/Node.js-API%20Layer-339933?style=for-the-badge&logo=node.js&logoColor=ffffff" alt="Node.js badge" />
+  <img src="https://img.shields.io/badge/Deployed%20on-Vercel-000000?style=for-the-badge&logo=vercel&logoColor=ffffff" alt="Vercel badge" />
+</p>
 
-A high-performance, single-page application built to demonstrate my expertise in modern web development, backend API integration, and production-grade security practices. This portfolio serves as both a showcase of my past projects and a technical demonstration of my software engineering capabilities.
+## About This Project
 
----
+This is my personal software engineering portfolio project. I built it to present my professional identity, skills, projects, certifications, GitHub analytics, contact information, and AI assistant in one responsive single-page website.
 
-## 🏗️ Architecture & Technologies
+The portfolio is designed to feel like a developer workspace: dark interface, terminal-style interactions, animated profile sections, project cards, certification popups, and a compact AI chat widget.
 
-The application is built on a modern JavaScript stack, utilizing component-based UI rendering without the overhead of heavy frontend frameworks.
+## Highlights
 
-- **Frontend:** HTML5, CSS3, ES6+ JavaScript Modules
-- **Backend API:** Node.js, Express.js
-- **Tooling & Bundling:** Vite, esbuild
-- **Third-Party Integrations:** GitHub REST API, OpenRouter API
-- **Syntax Highlighting:** Prism.js (Loaded via secure Subresource Integrity)
-- **Security Suite:** `helmet`, `cors`, `express-rate-limit`, `dompurify`
+| Feature | What it does |
+| --- | --- |
+| Hero profile and terminal | Introduces my profile with an animated terminal-style code panel. |
+| Featured projects | Shows my main projects with stack tags, links, and hover preview images. |
+| Skills dashboard | Organizes my technical skills by category for quick scanning. |
+| Fardin's AI assistant | Lets visitors ask about my skills, projects, contact, and portfolio information. |
+| GitHub analytics | Fetches live public repository data from the GitHub REST API. |
+| Certifications | Displays verified certifications with responsive certificate image popups. |
+| Contact terminal | Presents contact information in a developer-themed section. |
 
----
+## Tech Stack
 
-## ⚙️ Core Features
+| Area | Tools |
+| --- | --- |
+| Frontend | HTML5, CSS3, JavaScript ES modules |
+| Build tooling | Vite, esbuild |
+| Backend/API | Node.js, Express.js, Vercel serverless function |
+| AI integration | OpenRouter API |
+| Data/API | GitHub REST API |
+| Security | DOMPurify, Helmet, CORS, rate limiting, input validation |
+| Deployment | Vercel |
 
-### Interactive Terminal Simulation
-Developed a real-time character-by-character typing simulation that mimics a developer's workspace. It integrates Prism.js for accurate syntax highlighting and utilizes the `IntersectionObserver` API for performant rendering when the component enters the viewport.
+## Key Improvements
 
-### Embedded AI Assistant
-Built a custom chat interface connected to advanced language models via the OpenRouter API. 
-- **State Management:** Handles asynchronous messaging state and loading indicators.
-- **Backend Integration:** Routes traffic through a dedicated Express server to conceal API credentials.
-- **Security Mechanisms:** Implemented strict input validation, system prompt hardening, and IP-based rate limiting to prevent API abuse.
+- Added real project preview images for LocationKhuji and UniBuddy.
+- Added clickable certification cards for C)PTE and EDGE-CUET certificates.
+- Added a responsive animated certificate modal with Escape close, backdrop close, focus return, and scroll lock.
+- Improved mobile behavior so project images and certificate popups remain readable on small screens.
+- Updated source-control hygiene with ignored report artifacts and local document outputs.
 
-### Dynamic GitHub Analytics
-Engineered a live analytics dashboard that interfaces with the GitHub REST API to fetch and render real-time repository data, star counts, and language distribution, complete with fallback mechanisms for API rate limits.
+## Project Structure
 
----
+```text
+My_Portfoilo/
+|-- api/
+|   `-- chat.js
+|-- public/
+|   |-- readme/
+|   |   `-- portfolio-preview.png
+|   |-- projects/
+|   |   |-- locationkhuji.png
+|   |   `-- unibuddy-app.png
+|   |-- cpte_fardin.jpg
+|   |-- EDGE-CUET.jpg
+|   `-- Fardin_Hossain_Resume.pdf
+|-- src/
+|   |-- components/
+|   |-- App.js
+|   |-- data.js
+|   |-- icons.js
+|   |-- index.css
+|   `-- main.js
+|-- server.js
+|-- vite.config.js
+`-- package.json
+```
 
-## 🛡️ Security Implementation
+## Run Locally
 
-This application implements strict security standards to ensure production readiness:
+### 1. Clone the repository
 
-1. **Build Isolation:** Backend binaries (`server.bundle.cjs`) are explicitly isolated from the public frontend `dist/` directory to prevent source code disclosure.
-2. **HTTP Hardening:** Protected by the `helmet` middleware suite to enforce secure HTTP headers (e.g., Content-Security-Policy, Strict-Transport-Security).
-3. **Cross-Site Scripting (XSS) Mitigation:** All user-facing dynamic inputs and AI-generated outputs are strictly sanitized using `DOMPurify` prior to DOM injection.
-4. **Rate Limiting:** Implemented `express-rate-limit` on critical API endpoints to mitigate Financial Denial of Service (FDoS) attacks against third-party API quotas.
-5. **CORS & Data Validation:** Enforces strict Cross-Origin Resource Sharing policies and validates all payload sizes and types before backend processing.
-
----
-
-## 🚀 Local Development
-
-### 1. Prerequisites
-Ensure **[Node.js](https://nodejs.org/) (v18 or higher)** is installed on your local environment.
-
-### 2. Installation
-Clone the repository and install the required dependencies:
 ```bash
 git clone https://github.com/fardinhossain/MyPortfolio.git
 cd MyPortfolio
+```
+
+### 2. Install dependencies
+
+```bash
 npm install
 ```
 
-### 3. Environment Configuration
-Create a `.env` file in the root directory to configure the OpenRouter API:
+### 3. Configure environment variables
+
+Create a `.env` file in the project root:
+
 ```env
 OPENROUTER_API_KEY=your_openrouter_api_key_here
 ```
-*(Note: The `.env` file is safely ignored by source control to prevent credential leakage.)*
 
-### 4. Running the Application
-To start the local development server:
+### 4. Start the development server
+
 ```bash
 npm run dev
 ```
-Navigate to `http://localhost:3000` in your web browser.
 
-### 5. Production Build
-To compile the client application and bundle the backend for production environments:
+Open `http://localhost:3000` in your browser.
+
+### 5. Build for production
+
 ```bash
 npm run build
 npm start
 ```
 
----
+## Security Notes
 
-## 📬 Contact
+- API keys are kept on the server side through environment variables.
+- Chat messages are validated and length-limited before reaching the AI provider.
+- Dynamic chat output is sanitized with DOMPurify before rendering.
+- The Express server includes Helmet, CORS, and rate limiting.
+- `.env` and generated report files are ignored by Git.
+
+## Contact
 
 **Md. Fardin Hossain**  
-Software Engineer  
-Email: [fardin.hosn@gmail.com](mailto:fardin.hosn@gmail.com)  
-GitHub: [fardinhossain](https://github.com/fardinhossain)  
-LinkedIn: [fardinhosn](https://www.linkedin.com/in/fardinhosn)
+Software Engineering Portfolio  
+
+- Email: [fardin.hosn@gmail.com](mailto:fardin.hosn@gmail.com)
+- GitHub: [github.com/fardinhossain](https://github.com/fardinhossain)
+- LinkedIn: [linkedin.com/in/fardinhosn](https://www.linkedin.com/in/fardinhosn)
+- Live website: [mdfardin.vercel.app](https://mdfardin.vercel.app/)
