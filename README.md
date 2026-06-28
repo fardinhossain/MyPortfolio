@@ -115,6 +115,8 @@ CONTACT_FROM_EMAIL=Portfolio Contact <onboarding@resend.dev>
 
 For production email delivery, verify a sending domain in Resend and replace `CONTACT_FROM_EMAIL` with an address on that domain. Add the same environment variables in the Vercel or Netlify project settings.
 
+If the email API is not configured or is temporarily unavailable, the contact form automatically opens a prefilled message in the visitor's email app so the message is never lost.
+
 ### 4. Start the development server
 
 ```bash

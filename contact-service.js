@@ -98,8 +98,9 @@ export async function processContactRequest(payload) {
       status: isNotConfigured ? 503 : 502,
       body: {
         success: false,
+        code: isNotConfigured ? 'CONTACT_NOT_CONFIGURED' : 'EMAIL_DELIVERY_FAILED',
         message: isNotConfigured
-          ? 'The message service is temporarily unavailable. Please email me directly.'
+          ? 'Direct delivery is not configured. Opening an email draft instead.'
           : 'Your message could not be sent right now. Please try again shortly.',
       },
     };
