@@ -6,119 +6,48 @@
   overflow: hidden;
 }
 
-.custom-cursor__arrow,
-.custom-cursor__trail {
+.custom-cursor__asset {
   --cursor-scale: 1;
   position: absolute;
   top: 0;
   left: 0;
-  width: 1.25rem;
-  height: 1.55rem;
   display: block;
+  max-width: none;
+  object-fit: contain;
   opacity: 0;
-  clip-path: polygon(0 0, 0 82%, 27% 64%, 48% 100%, 65% 91%, 45% 57%, 82% 57%);
   pointer-events: none;
-  transform-origin: 0 0;
+  user-select: none;
   will-change: transform;
+  transition: opacity 100ms ease, filter 150ms ease;
 }
 
-.custom-cursor__arrow {
-  background: linear-gradient(145deg, #ffffff 0 17%, #fb7185 38% 68%, #38bdf8 100%);
+.custom-cursor__asset--default {
+  width: 2.25rem;
+  height: 2.25rem;
+  transform-origin: 0 0;
+  filter: drop-shadow(0 0 4px rgba(56, 189, 248, 0.5));
+}
+
+.custom-cursor__asset--pointer {
+  width: 3rem;
+  height: 3rem;
+  margin-top: -2.7rem;
+  margin-left: -1.5rem;
+  transform-origin: 50% 90%;
   filter:
-    drop-shadow(0 0 3px rgba(251, 113, 133, 0.95))
-    drop-shadow(0 0 9px rgba(244, 63, 94, 0.48));
-  transition: opacity 100ms ease, filter 160ms ease;
+    drop-shadow(0 2px 2px rgba(0, 0, 0, 0.72))
+    drop-shadow(0 0 5px rgba(251, 113, 133, 0.34));
 }
 
-.custom-cursor__arrow::before {
-  content: '';
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  width: calc(100% - 4px);
-  height: calc(100% - 4px);
-  clip-path: polygon(0 0, 0 82%, 27% 64%, 48% 100%, 65% 91%, 45% 57%, 82% 57%);
-  background: #120a0a;
-  transition: background-color 160ms ease;
-}
-
-.custom-cursor__trail {
-  --cursor-scale: 1.18;
-  background: linear-gradient(145deg, rgba(251, 113, 133, 0.34), rgba(56, 189, 248, 0.18));
-  filter: blur(0.2px) drop-shadow(0 0 7px rgba(56, 189, 248, 0.24));
-  transition: opacity 140ms ease;
-}
-
-.custom-cursor__trail::before {
-  content: '';
-  position: absolute;
-  top: 1px;
-  left: 1px;
-  width: calc(100% - 2px);
-  height: calc(100% - 2px);
-  clip-path: polygon(0 0, 0 82%, 27% 64%, 48% 100%, 65% 91%, 45% 57%, 82% 57%);
-  background: rgba(10, 6, 6, 0.82);
-}
-
-.custom-cursor.is-visible .custom-cursor__arrow {
+.custom-cursor.is-visible:not(.is-interactive) .custom-cursor__asset--default,
+.custom-cursor.is-visible.is-interactive .custom-cursor__asset--pointer {
   opacity: 1;
 }
 
-.custom-cursor.is-visible .custom-cursor__trail {
-  opacity: 0.52;
-}
-
-.custom-cursor.is-interactive .custom-cursor__arrow {
-  --cursor-scale: 1.12;
-  background: linear-gradient(145deg, #ffffff 0 14%, #38bdf8 34% 66%, #34d399 100%);
-  filter:
-    drop-shadow(0 0 4px rgba(56, 189, 248, 0.98))
-    drop-shadow(0 0 11px rgba(56, 189, 248, 0.55));
-}
-
-.custom-cursor.is-interactive .custom-cursor__arrow::before {
-  background: #081014;
-}
-
-.custom-cursor.is-interactive .custom-cursor__trail {
-  --cursor-scale: 1.38;
-  opacity: 0.72;
-}
-
-.custom-cursor.is-text .custom-cursor__arrow {
-  width: 0.16rem;
-  height: 1.35rem;
-  margin-top: -0.68rem;
-  margin-left: -0.08rem;
-  clip-path: none;
-  border-radius: 1px;
-  background: #38bdf8;
-  box-shadow: 0 0 9px rgba(56, 189, 248, 0.78);
-  filter: none;
-}
-
-.custom-cursor.is-text .custom-cursor__arrow::before {
-  top: 0;
-  left: -0.2rem;
-  width: 0.56rem;
-  height: 100%;
-  clip-path: polygon(0 0, 100% 0, 100% 2px, 62% 2px, 62% calc(100% - 2px), 100% calc(100% - 2px), 100% 100%, 0 100%, 0 calc(100% - 2px), 38% calc(100% - 2px), 38% 2px, 0 2px);
-  background: #38bdf8;
-}
-
-.custom-cursor.is-text .custom-cursor__trail {
-  opacity: 0;
-}
-
-.custom-cursor.is-pressed .custom-cursor__arrow {
-  --cursor-scale: 0.82;
-  background: #34d399;
-  filter: drop-shadow(0 0 9px rgba(52, 211, 153, 0.92));
-}
-
-.custom-cursor.is-pressed .custom-cursor__trail {
-  --cursor-scale: 1;
-  opacity: 0.28;
+.custom-cursor.is-pressed .custom-cursor__asset--default,
+.custom-cursor.is-pressed .custom-cursor__asset--pointer {
+  --cursor-scale: 0.86;
+  filter: drop-shadow(0 0 7px rgba(52, 211, 153, 0.72));
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -128,8 +57,14 @@
   }
 }
 
-@media (prefers-reduced-motion: reduce), (hover: none), (pointer: coarse) {
+@media (hover: none), (pointer: coarse) {
   .custom-cursor {
     display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .custom-cursor__asset {
+    transition: none;
   }
 }
