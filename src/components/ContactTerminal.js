@@ -93,21 +93,6 @@ export function initContactTerminal() {
 
   initTicTacToe();
 
-  function openEmailFallback(payload) {
-    const subject = `[Portfolio] ${payload.subject}`;
-    const body = [
-      `Name: ${payload.name}`,
-      `Email: ${payload.email}`,
-      '',
-      payload.message,
-    ].join('\n');
-    const mailtoUrl = `mailto:${RESUME_DATA.contact.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
-    status.classList.add('contact-terminal__status--success');
-    status.textContent = 'Your email app is opening with the message filled in. Press Send to finish.';
-    window.location.href = mailtoUrl;
-  }
-
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
 
@@ -133,10 +118,6 @@ export function initContactTerminal() {
       const data = await response.json().catch(() => ({}));
 
       if (!response.ok) {
-        if (response.status >= 500) {
-          openEmailFallback(payload);
-          return;
-        }
         throw new Error(data.message || 'Unable to send your message right now.');
       }
 

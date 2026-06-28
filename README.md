@@ -112,11 +112,10 @@ OPENROUTER_API_KEY=your_openrouter_api_key_here
 RESEND_API_KEY=your_resend_api_key_here
 CONTACT_TO_EMAIL=fardin.hosn@gmail.com
 CONTACT_FROM_EMAIL=Portfolio Contact <onboarding@resend.dev>
+CONTACT_SITE_URL=https://mdfardin.vercel.app
 ```
 
-For production email delivery, verify a sending domain in Resend and replace `CONTACT_FROM_EMAIL` with an address on that domain. Add the same environment variables in the Vercel or Netlify project settings.
-
-If the email API is not configured or is temporarily unavailable, the contact form automatically opens a prefilled message in the visitor's email app so the message is never lost.
+For production email delivery, verify a sending domain in Resend and replace `CONTACT_FROM_EMAIL` with an address on that domain. Add the same environment variables in the Vercel or Netlify project settings. If `RESEND_API_KEY` is omitted, the server uses FormSubmit's AJAX email relay instead; approve its one-time activation email before accepting messages.
 
 ### 4. Start the development server
 
