@@ -1,6 +1,7 @@
 import './ContactTerminal.css';
 import { iconMapPin, iconLinkedin, iconGithub, iconMail, iconSend, iconTerminalSquare } from '../icons.js';
 import { RESUME_DATA } from '../data.js';
+import { initTicTacToe, renderTicTacToe } from './TicTacToe.js';
 
 export function renderContactTerminal() {
   return `
@@ -36,6 +37,8 @@ export function renderContactTerminal() {
               <a href="${RESUME_DATA.contact.github}" target="_blank" rel="noopener noreferrer" class="contact-terminal__item-value contact-terminal__item-value--link">github.com/fardinhossain</a>
             </div>
           </div>
+
+          ${renderTicTacToe()}
         </div>
 
         <form class="contact-terminal__form" id="contact-form">
@@ -87,6 +90,8 @@ export function initContactTerminal() {
   const status = document.getElementById('contact-form-status');
 
   if (!form || !status) return;
+
+  initTicTacToe();
 
   function openEmailFallback(payload) {
     const subject = `[Portfolio] ${payload.subject}`;

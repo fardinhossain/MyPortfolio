@@ -239,7 +239,17 @@ ul, ol {
 }
 
 .section-contact {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1rem;
   scroll-margin-top: 6rem;
+}
+
+@media (min-width: 768px) {
+  .section-contact {
+    padding: 0 2rem;
+  }
 }
 
 /* ========== Animations ========== */

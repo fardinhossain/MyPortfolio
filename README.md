@@ -38,6 +38,7 @@ The portfolio is designed to feel like a developer workspace: dark interface, te
 | GitHub analytics | Fetches live public repository data from the GitHub REST API. |
 | Certifications | Displays verified certifications with responsive certificate image popups. |
 | Contact terminal | Provides contact links and a secure email message form in a developer-themed section. |
+| Tic-tac-toe AI | Lets visitors play an interactive round against a local minimax AI. |
 
 ## Tech Stack
 

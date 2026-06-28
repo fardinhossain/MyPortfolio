@@ -1,0 +1,213 @@
+.tic-tac-toe {
+  margin-top: 1.75rem;
+  padding: 1rem;
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  border-radius: 0.75rem;
+  background:
+    radial-gradient(circle at 0 100%, rgba(56, 189, 248, 0.07), transparent 48%),
+    rgba(8, 10, 14, 0.72);
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+}
+
+.tic-tac-toe__header,
+.tic-tac-toe__heading,
+.tic-tac-toe__play-area {
+  display: flex;
+  align-items: center;
+}
+
+.tic-tac-toe__header {
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.tic-tac-toe__heading {
+  min-width: 0;
+  gap: 0.7rem;
+}
+
+.tic-tac-toe__icon-wrap {
+  width: 2.1rem;
+  height: 2.1rem;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(56, 189, 248, 0.24);
+  border-radius: 0.55rem;
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.08);
+}
+
+.tic-tac-toe__icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+.tic-tac-toe__title {
+  color: #e2e8f0;
+  font-size: 0.78rem;
+  line-height: 1.1rem;
+  font-weight: 700;
+}
+
+.tic-tac-toe__subtitle {
+  margin-top: 0.15rem;
+  color: #64748b;
+  font-size: 0.6rem;
+  line-height: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.tic-tac-toe__reset {
+  flex: 0 0 auto;
+  border: 1px solid rgba(100, 116, 139, 0.28);
+  border-radius: 0.45rem;
+  padding: 0.45rem 0.65rem;
+  color: #94a3b8;
+  background: rgba(15, 23, 42, 0.32);
+  font-family: inherit;
+  font-size: 0.62rem;
+  transition: color 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.tic-tac-toe__reset:hover,
+.tic-tac-toe__reset:focus-visible {
+  color: #e2e8f0;
+  border-color: rgba(56, 189, 248, 0.55);
+  background: rgba(56, 189, 248, 0.08);
+  outline: none;
+}
+
+.tic-tac-toe__status {
+  min-height: 1rem;
+  margin: 0.9rem 0;
+  color: #94a3b8;
+  font-size: 0.66rem;
+  line-height: 1rem;
+}
+
+.tic-tac-toe__play-area {
+  align-items: stretch;
+  gap: 1rem;
+}
+
+.tic-tac-toe__board {
+  width: min(12.5rem, 58%);
+  flex: 0 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.35rem;
+  aspect-ratio: 1;
+}
+
+.tic-tac-toe__cell {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  border: 1px solid rgba(100, 116, 139, 0.28);
+  border-radius: 0.45rem;
+  color: #fb7185;
+  background: rgba(18, 10, 10, 0.88);
+  font-family: inherit;
+  font-size: clamp(1.25rem, 4vw, 1.8rem);
+  font-weight: 700;
+  line-height: 1;
+  transition: transform 0.15s ease, border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.tic-tac-toe__cell:not(:disabled):hover {
+  transform: translateY(-1px);
+  border-color: rgba(251, 113, 133, 0.55);
+  background: rgba(136, 19, 55, 0.15);
+}
+
+.tic-tac-toe__cell:focus-visible {
+  outline: 2px solid #38bdf8;
+  outline-offset: 2px;
+}
+
+.tic-tac-toe__cell[data-mark='O'] {
+  color: #38bdf8;
+}
+
+.tic-tac-toe__cell.is-winning {
+  border-color: #34d399;
+  background: rgba(16, 185, 129, 0.12);
+  box-shadow: 0 0 18px rgba(16, 185, 129, 0.1);
+}
+
+.tic-tac-toe__board.is-thinking {
+  opacity: 0.72;
+}
+
+.tic-tac-toe__scoreboard {
+  min-width: 0;
+  flex: 1 1 auto;
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+  gap: 0.35rem;
+}
+
+.tic-tac-toe__score {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.45rem 0.6rem;
+  border: 1px solid rgba(100, 116, 139, 0.18);
+  border-radius: 0.4rem;
+  color: #64748b;
+  background: rgba(15, 23, 42, 0.22);
+  font-size: 0.58rem;
+}
+
+.tic-tac-toe__score span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tic-tac-toe__score strong {
+  color: #cbd5e1;
+  font-size: 0.82rem;
+}
+
+.tic-tac-toe__score--player strong {
+  color: #fb7185;
+}
+
+.tic-tac-toe__score--ai strong {
+  color: #38bdf8;
+}
+
+@media (max-width: 420px) {
+  .tic-tac-toe__play-area {
+    flex-direction: column;
+  }
+
+  .tic-tac-toe__board {
+    width: min(100%, 14rem);
+    align-self: center;
+  }
+
+  .tic-tac-toe__scoreboard {
+    width: 100%;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-rows: none;
+  }
+
+  .tic-tac-toe__score {
+    flex-direction: column;
+    gap: 0.2rem;
+    text-align: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tic-tac-toe__cell,
+  .tic-tac-toe__reset {
+    transition: none;
+  }
+}
