@@ -13,21 +13,17 @@ export function initCustomCursor() {
   cursor.className = 'custom-cursor';
   cursor.setAttribute('aria-hidden', 'true');
   cursor.innerHTML = `
-    <span class="custom-cursor__halo"></span>
-    <span class="custom-cursor__ring"></span>
-    <span class="custom-cursor__dot"></span>
+    <span class="custom-cursor__trail"></span>
+    <span class="custom-cursor__arrow"></span>
   `;
   document.body.appendChild(cursor);
 
-  const halo = cursor.querySelector('.custom-cursor__halo');
-  const ring = cursor.querySelector('.custom-cursor__ring');
-  const dot = cursor.querySelector('.custom-cursor__dot');
+  const trail = cursor.querySelector('.custom-cursor__trail');
+  const arrow = cursor.querySelector('.custom-cursor__arrow');
   let pointerX = -100;
   let pointerY = -100;
-  let ringX = pointerX;
-  let ringY = pointerY;
-  let haloX = pointerX;
-  let haloY = pointerY;
+  let trailX = pointerX;
+  let trailY = pointerY;
   let animationFrame = null;
   let hasPosition = false;
 
@@ -36,31 +32,23 @@ export function initCustomCursor() {
   }
 
   function setTransform(element, x, y) {
-    element.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%) scale(var(--cursor-scale, 1))`;
+    element.style.transform = `translate3d(${x}px, ${y}px, 0) scale(var(--cursor-scale, 1))`;
   }
 
   function animateRing() {
-    ringX += (pointerX - ringX) * 0.24;
-    ringY += (pointerY - ringY) * 0.24;
-    haloX += (pointerX - haloX) * 0.12;
-    haloY += (pointerY - haloY) * 0.12;
-    setTransform(ring, ringX, ringY);
-    setTransform(halo, haloX, haloY);
+    trailX += (pointerX - trailX) * 0.16;
+    trailY += (pointerY - trailY) * 0.16;
+    setTransform(trail, trailX, trailY);
 
     if (
-      Math.abs(pointerX - ringX) > 0.08
-      || Math.abs(pointerY - ringY) > 0.08
-      || Math.abs(pointerX - haloX) > 0.08
-      || Math.abs(pointerY - haloY) > 0.08
+      Math.abs(pointerX - trailX) > 0.08
+      || Math.abs(pointerY - trailY) > 0.08
     ) {
       animationFrame = window.requestAnimationFrame(animateRing);
     } else {
-      ringX = pointerX;
-      ringY = pointerY;
-      haloX = pointerX;
-      haloY = pointerY;
-      setTransform(ring, ringX, ringY);
-      setTransform(halo, haloX, haloY);
+      trailX = pointerX;
+      trailY = pointerY;
+      setTransform(trail, trailX, trailY);
       animationFrame = null;
     }
   }
@@ -80,15 +68,12 @@ export function initCustomCursor() {
 
     pointerX = event.clientX;
     pointerY = event.clientY;
-    setTransform(dot, pointerX, pointerY);
+    setTransform(arrow, pointerX, pointerY);
 
     if (!hasPosition) {
-      ringX = pointerX;
-      ringY = pointerY;
-      haloX = pointerX;
-      haloY = pointerY;
-      setTransform(ring, ringX, ringY);
-      setTransform(halo, haloX, haloY);
+      trailX = pointerX;
+      trailY = pointerY;
+      setTransform(trail, trailX, trailY);
       hasPosition = true;
     }
 
