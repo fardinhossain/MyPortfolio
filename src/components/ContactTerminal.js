@@ -22,7 +22,7 @@ export function renderContactTerminal() {
           <div class="contact-terminal__grid">
             <div class="contact-terminal__item">
               <div class="contact-terminal__item-label">${iconMail(12, 'contact-terminal__item-label-icon')} Email</div>
-              <a href="https://mail.google.com/mail/u/0/?view=cm&amp;fs=1&amp;to=${encodeURIComponent(RESUME_DATA.contact.email)}" target="_blank" rel="noopener noreferrer" class="contact-terminal__item-value contact-terminal__item-value--link">${RESUME_DATA.contact.email}</a>
+              <a href="https://mail.google.com/mail/u/0/#inbox?compose=new" target="_blank" rel="noopener noreferrer" class="contact-terminal__item-value contact-terminal__item-value--link">${RESUME_DATA.contact.email}</a>
             </div>
             <div class="contact-terminal__item">
               <div class="contact-terminal__item-label">${iconMapPin(12, 'contact-terminal__item-label-icon')} Location</div>
