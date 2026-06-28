@@ -80,7 +80,7 @@ export function renderTicTacToe() {
         <div class="tic-tac-toe__heading">
           <span class="tic-tac-toe__icon-wrap">${iconBot(16, 'tic-tac-toe__icon')}</span>
           <div>
-            <h3 class="tic-tac-toe__title" id="tic-tac-toe-title">Play Fardin's AI</h3>
+            <h3 class="tic-tac-toe__title" id="tic-tac-toe-title">Play With Fardin's AI</h3>
             <p class="tic-tac-toe__subtitle">Tic-tac-toe · Hard mode</p>
           </div>
         </div>
