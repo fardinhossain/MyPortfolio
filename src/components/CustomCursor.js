@@ -1,6 +1,7 @@
 const RIFF_HEADER_SIZE = 12;
 const CHUNK_HEADER_SIZE = 8;
 const JIFFY_DURATION_MS = 1000 / 60;
+const CURSOR_SIZE = 16;
 const INTERACTIVE_SELECTOR = 'a, button, select, input[type="button"], input[type="submit"], input[type="reset"], input[type="checkbox"], input[type="radio"], [role="button"], [role="gridcell"], [tabindex]:not([tabindex="-1"])';
 
 function readFourCC(view, offset) {
@@ -39,6 +40,53 @@ function readDwordArray(view, offset, size) {
     values.push(view.getUint32(offset + index * 4, true));
   }
   return values;
+}
+
+export function selectCurSize(arrayBuffer, targetSize = CURSOR_SIZE) {
+  const view = new DataView(arrayBuffer);
+  if (view.byteLength < 22 || view.getUint16(0, true) !== 0 || view.getUint16(2, true) !== 2) {
+    throw new Error('Invalid CUR cursor frame.');
+  }
+
+  const imageCount = view.getUint16(4, true);
+  const entries = [];
+
+  for (let index = 0; index < imageCount; index += 1) {
+    const offset = 6 + index * 16;
+    if (offset + 16 > view.byteLength) break;
+
+    entries.push({
+      offset,
+      width: view.getUint8(offset) || 256,
+      height: view.getUint8(offset + 1) || 256,
+      byteLength: view.getUint32(offset + 8, true),
+      imageOffset: view.getUint32(offset + 12, true),
+    });
+  }
+
+  const chosen = entries
+    .filter((entry) => entry.imageOffset + entry.byteLength <= view.byteLength)
+    .sort((a, b) => {
+      const aDistance = Math.abs(Math.max(a.width, a.height) - targetSize);
+      const bDistance = Math.abs(Math.max(b.width, b.height) - targetSize);
+      return aDistance - bDistance || Math.max(a.width, a.height) - Math.max(b.width, b.height);
+    })[0];
+
+  if (!chosen) throw new Error('CUR cursor contains no usable images.');
+
+  const output = new ArrayBuffer(22 + chosen.byteLength);
+  const outputView = new DataView(output);
+  const outputBytes = new Uint8Array(output);
+  const sourceBytes = new Uint8Array(arrayBuffer);
+
+  outputView.setUint16(0, 0, true);
+  outputView.setUint16(2, 2, true);
+  outputView.setUint16(4, 1, true);
+  outputBytes.set(sourceBytes.subarray(chosen.offset, chosen.offset + 16), 6);
+  outputView.setUint32(18, 22, true);
+  outputBytes.set(sourceBytes.subarray(chosen.imageOffset, chosen.imageOffset + chosen.byteLength), 22);
+
+  return output;
 }
 
 export function parseAniCursor(arrayBuffer) {
@@ -82,6 +130,7 @@ export async function initCustomCursor() {
 
   let animationTimer;
   let frameUrls = [];
+  let pointerUrl;
   let currentStep = 0;
   let steps = [];
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -112,11 +161,17 @@ export async function initCustomCursor() {
   }
 
   try {
-    const response = await fetch('/cursor.ani');
-    if (!response.ok) throw new Error(`Unable to load cursor.ani (${response.status}).`);
+    const [cursorResponse, pointerResponse] = await Promise.all([
+      fetch('/cursor.ani'),
+      fetch('/pointer.cur'),
+    ]);
+    if (!cursorResponse.ok) throw new Error(`Unable to load cursor.ani (${cursorResponse.status}).`);
+    if (!pointerResponse.ok) throw new Error(`Unable to load pointer.cur (${pointerResponse.status}).`);
 
-    const parsed = parseAniCursor(await response.arrayBuffer());
-    frameUrls = parsed.frames.map((frame) => URL.createObjectURL(new Blob([frame], { type: 'image/x-icon' })));
+    const parsed = parseAniCursor(await cursorResponse.arrayBuffer());
+    frameUrls = parsed.frames.map((frame) => URL.createObjectURL(new Blob([selectCurSize(frame)], { type: 'image/x-icon' })));
+    pointerUrl = URL.createObjectURL(new Blob([selectCurSize(await pointerResponse.arrayBuffer())], { type: 'image/x-icon' }));
+    document.documentElement.style.setProperty('--portfolio-pointer', `url("${pointerUrl}"), pointer`);
     const frameIndexByBuffer = new Map(parsed.frames.map((frame, index) => [frame, index]));
     steps = parsed.steps.map((step) => ({
       frameIndex: frameIndexByBuffer.get(step.frame),
@@ -140,5 +195,6 @@ export async function initCustomCursor() {
   window.addEventListener('beforeunload', () => {
     stopAnimation();
     frameUrls.forEach((url) => URL.revokeObjectURL(url));
+    if (pointerUrl) URL.revokeObjectURL(pointerUrl);
   }, { once: true });
 }

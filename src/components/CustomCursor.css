@@ -1,5 +1,6 @@
 :root {
   --portfolio-cursor: auto;
+  --portfolio-pointer: pointer;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -20,13 +21,13 @@
   html.custom-cursor-enabled [role='button'],
   html.custom-cursor-enabled [role='gridcell'],
   html.custom-cursor-enabled [tabindex]:not([tabindex='-1']) {
-    cursor: url('/pointer.cur'), pointer !important;
+    cursor: var(--portfolio-pointer) !important;
   }
 
   html.custom-cursor-enabled.custom-pointer-active,
   html.custom-cursor-enabled.custom-pointer-active body,
   html.custom-cursor-enabled.custom-pointer-active body * {
-    cursor: url('/pointer.cur'), pointer !important;
+    cursor: var(--portfolio-pointer) !important;
   }
 
   html.custom-cursor-enabled input:not([type='button']):not([type='submit']):not([type='reset']):not([type='checkbox']):not([type='radio']),
