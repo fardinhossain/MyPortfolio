@@ -22,17 +22,17 @@
 }
 
 .custom-cursor__asset--default {
-  width: 2.25rem;
-  height: 2.25rem;
+  width: 1.75rem;
+  height: 1.75rem;
   transform-origin: 0 0;
   filter: drop-shadow(0 0 4px rgba(56, 189, 248, 0.5));
 }
 
 .custom-cursor__asset--pointer {
-  width: 3rem;
-  height: 3rem;
-  margin-top: -2.7rem;
-  margin-left: -1.5rem;
+  width: 2.25rem;
+  height: 2.25rem;
+  margin-top: -2rem;
+  margin-left: -1.125rem;
   transform-origin: 50% 90%;
   filter:
     drop-shadow(0 2px 2px rgba(0, 0, 0, 0.72))
