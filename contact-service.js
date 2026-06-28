@@ -70,46 +70,13 @@ async function sendWithResend(data, apiKey) {
   }
 }
 
-async function sendWithFormSubmit(data) {
-  const recipient = process.env.CONTACT_TO_EMAIL || 'fardin.hosn@gmail.com';
-  const siteUrl = (process.env.CONTACT_SITE_URL || 'https://mdfardin.vercel.app').replace(/\/+$/, '');
-  const formResponse = await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(recipient)}`, {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      Origin: siteUrl,
-      Referer: `${siteUrl}/`,
-    },
-    body: JSON.stringify({
-      name: data.name,
-      email: data.email,
-      subject: data.subject,
-      message: data.message,
-      _replyto: data.email,
-      _subject: `[Portfolio] ${data.subject}`,
-      _template: 'table',
-      _captcha: 'false',
-    }),
-  });
-
-  const responseBody = await formResponse.json().catch(() => ({}));
-  const succeeded = responseBody.success === true || responseBody.success === 'true';
-
-  if (!formResponse.ok || !succeeded) {
-    const providerMessage = typeof responseBody.message === 'string' ? responseBody.message : '';
-    const error = new Error(`Form relay returned ${formResponse.status}: ${providerMessage.slice(0, 500)}`);
-    if (providerMessage.toLowerCase().includes('activation')) {
-      error.code = 'CONTACT_ACTIVATION_REQUIRED';
-    }
-    throw error;
-  }
-}
-
 export async function sendContactEmail(data) {
   const apiKey = process.env.RESEND_API_KEY;
   if (apiKey) return sendWithResend(data, apiKey);
-  return sendWithFormSubmit(data);
+
+  const error = new Error('Browser email relay required.');
+  error.code = 'BROWSER_RELAY_REQUIRED';
+  throw error;
 }
 
 export async function processContactRequest(payload) {
@@ -128,14 +95,14 @@ export async function processContactRequest(payload) {
     return { status: 200, body: { success: true, message: 'Message sent successfully. Thank you!' } };
   } catch (error) {
     console.error('Contact email error:', error);
-    const needsActivation = error.code === 'CONTACT_ACTIVATION_REQUIRED';
+    const browserRelayRequired = error.code === 'BROWSER_RELAY_REQUIRED';
     return {
-      status: needsActivation ? 503 : 502,
+      status: browserRelayRequired ? 503 : 502,
       body: {
         success: false,
-        code: needsActivation ? 'CONTACT_ACTIVATION_REQUIRED' : 'EMAIL_DELIVERY_FAILED',
-        message: needsActivation
-          ? 'Direct messaging is awaiting one-time activation by the portfolio owner.'
+        code: browserRelayRequired ? 'BROWSER_RELAY_REQUIRED' : 'EMAIL_DELIVERY_FAILED',
+        message: browserRelayRequired
+          ? 'Continue with the secure browser relay.'
           : 'Your message could not be sent right now. Please try again shortly.',
       },
     };

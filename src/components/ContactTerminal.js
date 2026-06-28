@@ -93,6 +93,33 @@ export function initContactTerminal() {
 
   initTicTacToe();
 
+  async function sendWithFormSubmit(payload) {
+    const relayResponse = await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(RESUME_DATA.contact.email)}`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: payload.name,
+        email: payload.email,
+        subject: payload.subject,
+        message: payload.message,
+        _replyto: payload.email,
+        _subject: `[Portfolio] ${payload.subject}`,
+        _template: 'table',
+        _captcha: 'false',
+        _honey: payload.website || '',
+      }),
+    });
+    const relayData = await relayResponse.json().catch(() => ({}));
+    const succeeded = relayData.success === true || relayData.success === 'true';
+
+    if (!relayResponse.ok || !succeeded) {
+      throw new Error(relayData.message || 'Your message could not be sent right now.');
+    }
+  }
+
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
 
@@ -118,6 +145,13 @@ export function initContactTerminal() {
       const data = await response.json().catch(() => ({}));
 
       if (!response.ok) {
+        if (data.code === 'BROWSER_RELAY_REQUIRED') {
+          await sendWithFormSubmit(payload);
+          form.reset();
+          status.classList.add('contact-terminal__status--success');
+          status.textContent = 'Message sent successfully. Thank you!';
+          return;
+        }
         throw new Error(data.message || 'Unable to send your message right now.');
       }
 

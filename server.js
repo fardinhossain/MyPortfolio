@@ -19,7 +19,7 @@ async function startServer() {
           scriptSrc: ["'self'", "'unsafe-inline'", "https://cdnjs.cloudflare.com"],
           styleSrc: ["'self'", "'unsafe-inline'", "https://cdnjs.cloudflare.com", "https://fonts.googleapis.com"],
           fontSrc: ["'self'", "https://fonts.gstatic.com"],
-          connectSrc: ["'self'", "https://api.github.com"],
+          connectSrc: ["'self'", "https://api.github.com", "https://formsubmit.co"],
           imgSrc: ["'self'", "data:", "https://github.com", "https://api.github.com"],
         },
       },
