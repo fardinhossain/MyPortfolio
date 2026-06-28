@@ -1,70 +1,37 @@
-.custom-cursor {
-  position: fixed;
-  inset: 0;
-  z-index: 10000;
-  pointer-events: none;
-  overflow: hidden;
-}
-
-.custom-cursor__asset {
-  --cursor-scale: 1;
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: block;
-  max-width: none;
-  object-fit: contain;
-  opacity: 0;
-  pointer-events: none;
-  user-select: none;
-  will-change: transform;
-  transition: opacity 100ms ease, filter 150ms ease;
-}
-
-.custom-cursor__asset--default {
-  width: 1.75rem;
-  height: 1.75rem;
-  transform-origin: 0 0;
-  filter: drop-shadow(0 0 4px rgba(56, 189, 248, 0.5));
-}
-
-.custom-cursor__asset--pointer {
-  width: 2.25rem;
-  height: 2.25rem;
-  margin-top: -2rem;
-  margin-left: -1.125rem;
-  transform-origin: 50% 90%;
-  filter:
-    drop-shadow(0 2px 2px rgba(0, 0, 0, 0.72))
-    drop-shadow(0 0 5px rgba(251, 113, 133, 0.34));
-}
-
-.custom-cursor.is-visible:not(.is-interactive) .custom-cursor__asset--default,
-.custom-cursor.is-visible.is-interactive .custom-cursor__asset--pointer {
-  opacity: 1;
-}
-
-.custom-cursor.is-pressed .custom-cursor__asset--default,
-.custom-cursor.is-pressed .custom-cursor__asset--pointer {
-  --cursor-scale: 0.86;
-  filter: drop-shadow(0 0 7px rgba(52, 211, 153, 0.72));
+:root {
+  --portfolio-cursor: auto;
 }
 
 @media (hover: hover) and (pointer: fine) {
   html.custom-cursor-enabled,
-  html.custom-cursor-enabled * {
-    cursor: none !important;
+  html.custom-cursor-enabled body,
+  html.custom-cursor-enabled body * {
+    cursor: var(--portfolio-cursor) !important;
   }
-}
 
-@media (hover: none), (pointer: coarse) {
-  .custom-cursor {
-    display: none;
+  html.custom-cursor-enabled a,
+  html.custom-cursor-enabled button,
+  html.custom-cursor-enabled select,
+  html.custom-cursor-enabled input[type='button'],
+  html.custom-cursor-enabled input[type='submit'],
+  html.custom-cursor-enabled input[type='reset'],
+  html.custom-cursor-enabled input[type='checkbox'],
+  html.custom-cursor-enabled input[type='radio'],
+  html.custom-cursor-enabled [role='button'],
+  html.custom-cursor-enabled [role='gridcell'],
+  html.custom-cursor-enabled [tabindex]:not([tabindex='-1']) {
+    cursor: url('/pointer.cur'), pointer !important;
   }
-}
 
-@media (prefers-reduced-motion: reduce) {
-  .custom-cursor__asset {
-    transition: none;
+  html.custom-cursor-enabled.custom-pointer-active,
+  html.custom-cursor-enabled.custom-pointer-active body,
+  html.custom-cursor-enabled.custom-pointer-active body * {
+    cursor: url('/pointer.cur'), pointer !important;
+  }
+
+  html.custom-cursor-enabled input:not([type='button']):not([type='submit']):not([type='reset']):not([type='checkbox']):not([type='radio']),
+  html.custom-cursor-enabled textarea,
+  html.custom-cursor-enabled [contenteditable='true'] {
+    cursor: text !important;
   }
 }

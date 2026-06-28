@@ -1,58 +1,144 @@
-const FINE_POINTER = '(hover: hover) and (pointer: fine)';
+const RIFF_HEADER_SIZE = 12;
+const CHUNK_HEADER_SIZE = 8;
+const JIFFY_DURATION_MS = 1000 / 60;
 const INTERACTIVE_SELECTOR = 'a, button, select, input[type="button"], input[type="submit"], input[type="reset"], input[type="checkbox"], input[type="radio"], [role="button"], [role="gridcell"], [tabindex]:not([tabindex="-1"])';
 
-export function initCustomCursor() {
-  const finePointer = window.matchMedia(FINE_POINTER);
+function readFourCC(view, offset) {
+  return String.fromCharCode(
+    view.getUint8(offset),
+    view.getUint8(offset + 1),
+    view.getUint8(offset + 2),
+    view.getUint8(offset + 3),
+  );
+}
 
-  if (document.querySelector('.custom-cursor')) return;
+function walkChunks(view, start, end, visit) {
+  let offset = start;
 
-  const cursor = document.createElement('div');
-  cursor.className = 'custom-cursor';
-  cursor.setAttribute('aria-hidden', 'true');
-  cursor.innerHTML = `
-    <img class="custom-cursor__asset custom-cursor__asset--default" src="/cursor.png" alt="" draggable="false">
-    <img class="custom-cursor__asset custom-cursor__asset--pointer" src="/pointer.png" alt="" draggable="false">
-  `;
-  document.body.appendChild(cursor);
+  while (offset + CHUNK_HEADER_SIZE <= end) {
+    const id = readFourCC(view, offset);
+    const size = view.getUint32(offset + 4, true);
+    const dataStart = offset + CHUNK_HEADER_SIZE;
+    const dataEnd = dataStart + size;
+    if (dataEnd > end || dataEnd > view.byteLength) break;
 
-  const defaultCursor = cursor.querySelector('.custom-cursor__asset--default');
-  const pointerCursor = cursor.querySelector('.custom-cursor__asset--pointer');
+    visit(id, dataStart, size);
 
-  function isEnabled() {
-    return finePointer.matches;
+    if ((id === 'LIST' || id === 'RIFF') && size >= 4) {
+      walkChunks(view, dataStart + 4, dataEnd, visit);
+    }
+
+    offset = dataEnd + (size % 2);
+  }
+}
+
+function readDwordArray(view, offset, size) {
+  const values = [];
+  const count = Math.floor(size / 4);
+  for (let index = 0; index < count; index += 1) {
+    values.push(view.getUint32(offset + index * 4, true));
+  }
+  return values;
+}
+
+export function parseAniCursor(arrayBuffer) {
+  const view = new DataView(arrayBuffer);
+  if (view.byteLength < RIFF_HEADER_SIZE || readFourCC(view, 0) !== 'RIFF' || readFourCC(view, 8) !== 'ACON') {
+    throw new Error('Invalid ANI cursor file.');
   }
 
-  function setTransform(element, x, y) {
-    element.style.transform = `translate3d(${x}px, ${y}px, 0) scale(var(--cursor-scale, 1))`;
-  }
+  const frames = [];
+  let defaultRate = 10;
+  let rates = [];
+  let sequence = [];
 
-  function updateCursorState(target) {
-    const element = target instanceof Element ? target : null;
-    cursor.classList.toggle('is-interactive', Boolean(element?.closest(INTERACTIVE_SELECTOR)));
-  }
-
-  function handlePointerMove(event) {
-    if (!isEnabled() || event.pointerType === 'touch') return;
-
-    setTransform(defaultCursor, event.clientX, event.clientY);
-    setTransform(pointerCursor, event.clientX, event.clientY);
-
-    document.documentElement.classList.add('custom-cursor-enabled');
-    cursor.classList.add('is-visible');
-    updateCursorState(event.target);
-  }
-
-  function disableCursor() {
-    cursor.classList.remove('is-visible', 'is-interactive', 'is-pressed');
-    document.documentElement.classList.remove('custom-cursor-enabled');
-  }
-
-  document.addEventListener('pointermove', handlePointerMove, { passive: true });
-  document.addEventListener('pointerdown', () => cursor.classList.add('is-pressed'), { passive: true });
-  document.addEventListener('pointerup', () => cursor.classList.remove('is-pressed'), { passive: true });
-  document.addEventListener('pointerout', (event) => {
-    if (!event.relatedTarget) cursor.classList.remove('is-visible');
+  walkChunks(view, RIFF_HEADER_SIZE, view.byteLength, (id, offset, size) => {
+    if (id === 'anih' && size >= 32) {
+      defaultRate = view.getUint32(offset + 28, true) || defaultRate;
+    } else if (id === 'rate') {
+      rates = readDwordArray(view, offset, size);
+    } else if (id === 'seq ') {
+      sequence = readDwordArray(view, offset, size);
+    } else if (id === 'icon') {
+      frames.push(arrayBuffer.slice(offset, offset + size));
+    }
   });
-  window.addEventListener('blur', () => cursor.classList.remove('is-visible'));
-  finePointer.addEventListener('change', disableCursor);
+
+  if (!frames.length) throw new Error('ANI cursor contains no frames.');
+
+  const frameOrder = sequence.length ? sequence : frames.map((_, index) => index);
+  const steps = frameOrder
+    .map((frameIndex, stepIndex) => ({
+      frame: frames[frameIndex],
+      duration: Math.max(16, (rates[stepIndex] || defaultRate) * JIFFY_DURATION_MS),
+    }))
+    .filter((step) => step.frame);
+
+  return { frames, steps };
+}
+
+export async function initCustomCursor() {
+  if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+  let animationTimer;
+  let frameUrls = [];
+  let currentStep = 0;
+  let steps = [];
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  function stopAnimation() {
+    window.clearTimeout(animationTimer);
+  }
+
+  function showFrame() {
+    if (!steps.length) return;
+
+    const step = steps[currentStep];
+    const frameUrl = frameUrls[step.frameIndex];
+    document.documentElement.style.setProperty(
+      '--portfolio-cursor',
+      `url("${frameUrl}"), url("/cursor.png") 2 2, auto`,
+    );
+    document.documentElement.classList.add('custom-cursor-enabled');
+
+    if (reducedMotion.matches || document.hidden) return;
+    currentStep = (currentStep + 1) % steps.length;
+    animationTimer = window.setTimeout(showFrame, step.duration);
+  }
+
+  function restartAnimation() {
+    stopAnimation();
+    if (!document.hidden) showFrame();
+  }
+
+  try {
+    const response = await fetch('/cursor.ani');
+    if (!response.ok) throw new Error(`Unable to load cursor.ani (${response.status}).`);
+
+    const parsed = parseAniCursor(await response.arrayBuffer());
+    frameUrls = parsed.frames.map((frame) => URL.createObjectURL(new Blob([frame], { type: 'image/x-icon' })));
+    const frameIndexByBuffer = new Map(parsed.frames.map((frame, index) => [frame, index]));
+    steps = parsed.steps.map((step) => ({
+      frameIndex: frameIndexByBuffer.get(step.frame),
+      duration: step.duration,
+    }));
+
+    showFrame();
+  } catch (error) {
+    console.warn('Animated cursor fallback:', error);
+    document.documentElement.style.setProperty('--portfolio-cursor', 'url("/cursor.png") 2 2, auto');
+    document.documentElement.classList.add('custom-cursor-enabled');
+  }
+
+  document.addEventListener('pointerover', (event) => {
+    const element = event.target instanceof Element ? event.target : null;
+    document.documentElement.classList.toggle('custom-pointer-active', Boolean(element?.closest(INTERACTIVE_SELECTOR)));
+  }, { passive: true });
+
+  document.addEventListener('visibilitychange', restartAnimation);
+  reducedMotion.addEventListener('change', restartAnimation);
+  window.addEventListener('beforeunload', () => {
+    stopAnimation();
+    frameUrls.forEach((url) => URL.revokeObjectURL(url));
+  }, { once: true });
 }
