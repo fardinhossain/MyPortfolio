@@ -13,17 +13,21 @@ export function initCustomCursor() {
   cursor.className = 'custom-cursor';
   cursor.setAttribute('aria-hidden', 'true');
   cursor.innerHTML = `
+    <span class="custom-cursor__halo"></span>
     <span class="custom-cursor__ring"></span>
     <span class="custom-cursor__dot"></span>
   `;
   document.body.appendChild(cursor);
 
+  const halo = cursor.querySelector('.custom-cursor__halo');
   const ring = cursor.querySelector('.custom-cursor__ring');
   const dot = cursor.querySelector('.custom-cursor__dot');
   let pointerX = -100;
   let pointerY = -100;
   let ringX = pointerX;
   let ringY = pointerY;
+  let haloX = pointerX;
+  let haloY = pointerY;
   let animationFrame = null;
   let hasPosition = false;
 
@@ -36,16 +40,27 @@ export function initCustomCursor() {
   }
 
   function animateRing() {
-    ringX += (pointerX - ringX) * 0.2;
-    ringY += (pointerY - ringY) * 0.2;
+    ringX += (pointerX - ringX) * 0.24;
+    ringY += (pointerY - ringY) * 0.24;
+    haloX += (pointerX - haloX) * 0.12;
+    haloY += (pointerY - haloY) * 0.12;
     setTransform(ring, ringX, ringY);
+    setTransform(halo, haloX, haloY);
 
-    if (Math.abs(pointerX - ringX) > 0.08 || Math.abs(pointerY - ringY) > 0.08) {
+    if (
+      Math.abs(pointerX - ringX) > 0.08
+      || Math.abs(pointerY - ringY) > 0.08
+      || Math.abs(pointerX - haloX) > 0.08
+      || Math.abs(pointerY - haloY) > 0.08
+    ) {
       animationFrame = window.requestAnimationFrame(animateRing);
     } else {
       ringX = pointerX;
       ringY = pointerY;
+      haloX = pointerX;
+      haloY = pointerY;
       setTransform(ring, ringX, ringY);
+      setTransform(halo, haloX, haloY);
       animationFrame = null;
     }
   }
@@ -70,7 +85,10 @@ export function initCustomCursor() {
     if (!hasPosition) {
       ringX = pointerX;
       ringY = pointerY;
+      haloX = pointerX;
+      haloY = pointerY;
       setTransform(ring, ringX, ringY);
+      setTransform(halo, haloX, haloY);
       hasPosition = true;
     }
 
