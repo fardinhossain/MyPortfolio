@@ -5,7 +5,6 @@ export const RESUME_DATA = {
   summary:
     "Computer Science and Engineering student with hands-on experience in full-stack web development and AI applications. I build scalable web applications using the MERN stack and have experience with machine learning and cybersecurity projects. Passionate about integrating advanced technologies to solve real-world problems and continuously expanding my skills in software engineering.",
   contact: {
-    phone: "01992748470",
     email: "fardin.hosn@gmail.com",
     linkedin: "https://www.linkedin.com/in/fardinhosn",
     github: "https://github.com/fardinhossain",

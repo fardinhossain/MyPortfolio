@@ -37,7 +37,7 @@ The portfolio is designed to feel like a developer workspace: dark interface, te
 | Fardin's AI assistant | Lets visitors ask about my skills, projects, contact, and portfolio information. |
 | GitHub analytics | Fetches live public repository data from the GitHub REST API. |
 | Certifications | Displays verified certifications with responsive certificate image popups. |
-| Contact terminal | Presents contact information in a developer-themed section. |
+| Contact terminal | Provides contact links and a secure email message form in a developer-themed section. |
 
 ## Tech Stack
 
@@ -45,8 +45,9 @@ The portfolio is designed to feel like a developer workspace: dark interface, te
 | --- | --- |
 | Frontend | HTML5, CSS3, JavaScript ES modules |
 | Build tooling | Vite, esbuild |
-| Backend/API | Node.js, Express.js, Vercel serverless function |
+| Backend/API | Node.js, Express.js, Vercel and Netlify serverless functions |
 | AI integration | OpenRouter API |
+| Email delivery | Resend API |
 | Data/API | GitHub REST API |
 | Security | DOMPurify, Helmet, CORS, rate limiting, input validation |
 | Deployment | Vercel |
@@ -107,7 +108,12 @@ Create a `.env` file in the project root:
 
 ```env
 OPENROUTER_API_KEY=your_openrouter_api_key_here
+RESEND_API_KEY=your_resend_api_key_here
+CONTACT_TO_EMAIL=fardin.hosn@gmail.com
+CONTACT_FROM_EMAIL=Portfolio Contact <onboarding@resend.dev>
 ```
+
+For production email delivery, verify a sending domain in Resend and replace `CONTACT_FROM_EMAIL` with an address on that domain. Add the same environment variables in the Vercel or Netlify project settings.
 
 ### 4. Start the development server
 
@@ -128,6 +134,7 @@ npm start
 
 - API keys are kept on the server side through environment variables.
 - Chat messages are validated and length-limited before reaching the AI provider.
+- Contact messages are validated server-side, protected with a honeypot and rate-limited by the Express server.
 - Dynamic chat output is sanitized with DOMPurify before rendering.
 - The Express server includes Helmet, CORS, and rate limiting.
 - `.env` and generated report files are ignored by Git.

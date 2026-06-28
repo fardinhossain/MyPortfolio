@@ -5,6 +5,7 @@ import { createServer as createViteServer } from "vite";
 import helmet from "helmet";
 import cors from "cors";
 import rateLimit from "express-rate-limit";
+import { processContactRequest } from "./contact-service.js";
 
 async function startServer() {
   const app = express();
@@ -25,12 +26,20 @@ async function startServer() {
     })
   );
   app.use(cors());
-  app.use(express.json());
+  app.use(express.json({ limit: "10kb" }));
 
   const chatLimiter = rateLimit({
     windowMs: 15 * 60 * 1000,
     max: 15,
     message: { reply: "You have reached the chat limit. Please try again later." }
+  });
+
+  const contactLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000,
+    max: 5,
+    standardHeaders: true,
+    legacyHeaders: false,
+    message: { success: false, message: "Too many messages. Please try again later." },
   });
 
   // Security: Disable X-Powered-By header to prevent technology disclosure
@@ -144,6 +153,12 @@ async function startServer() {
 
       res.json({ reply });
     }
+  });
+
+  app.post("/api/contact", contactLimiter, async (req, res) => {
+    const result = await processContactRequest(req.body);
+    res.set("Cache-Control", "no-store");
+    return res.status(result.status).json(result.body);
   });
 
   // Vite middleware for development

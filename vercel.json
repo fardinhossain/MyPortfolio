@@ -4,6 +4,7 @@
   "cleanUrls": true,
   "rewrites": [
     { "source": "/api/chat", "destination": "/api/chat.js" },
+    { "source": "/api/contact", "destination": "/api/contact.js" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
